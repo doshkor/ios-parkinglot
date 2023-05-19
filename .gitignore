@@ -95,4 +95,6 @@ iOSInjectionProject/
 
 # End of https://www.toptal.com/developers/gitignore/api/swift,cocoapods
 
+# Parking App
 .DS_Store
+*.plist
