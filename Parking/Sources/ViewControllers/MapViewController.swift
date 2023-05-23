@@ -7,13 +7,107 @@
 
 import UIKit
 import NMapsMap
+import CoreLocation
 
-class MapViewController: UIViewController {
+enum CommonUIConstant {
+    static let markerWidth:Double = 30
+    static let markerHeight:Double = markerWidth * 1.3
+    static let markerIconImage = NMF_MARKER_IMAGE_BLACK
+}
 
+class MapViewController: UIViewController, NMFMapViewTouchDelegate {
+    
+    // MARK: - Private property
+    
+    private let locationManager = CLLocationManager()
+    private lazy var naverMapView = NMFNaverMapView(frame: view.frame)
+    
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let mapView = NMFMapView(frame: view.frame)
-        view.addSubview(mapView)
+        
+        // MARK: - Configure
+        configure()
+        
+        // MARK: - 처음 위치로 화면 이동
+        moveCameraFirst()
+        
+        // MARK: - json 읽어오기
+        let parkingData = loadFromParkingJsonData()
+        if let parkingData {
+            parkingData.records.forEach {
+                if let lat = Double($0.위도), let lon = Double($0.경도) {
+                    markLocation(latitude: lat, longitude: lon)
+                }
+                else {
+                    // 주소 -> 위경도 reverse 필요함
+//                    print("no lat,lon")
+                }
+            }
+        }
+    }
+    
+    // MARK: - Private function
+    
+    private func configure() {
+        configureLocation()
+        configureNaverMapView()
+    }
+    
+    private func configureLocation() {
+        locationManager.requestWhenInUseAuthorization()
+    }
+    
+    private func configureNaverMapView() {
+        view.addSubview(naverMapView)
+        naverMapView.showCompass = true
+        naverMapView.showLocationButton = true
+    }
+    
+    private func moveCameraFirst() {
+        // 추후 사용자가 마지막으로 사용한 위치에 대해서 캐싱하기
+        // locationManager가 위치를 받는게 더 느리면 어떻게 처리할까?
+        guard let latitude = locationManager.location?.coordinate.latitude,
+              let longitude = locationManager.location?.coordinate.longitude
+        else {
+            return
+        }
+        let location = NMGLatLng(lat: latitude, lng: longitude)
+        moveCameraTo(location: location)
+    }
+    
+    private func moveCameraTo(location: NMGLatLng) {
+        let param = NMFCameraUpdateParams()
+        param.scroll(to: location)
+        param.zoom(to: 12)
+        param.tilt(to: 0)
+        param.rotate(to: 0)
+        naverMapView.mapView.moveCamera(NMFCameraUpdate(params: param))
+    }
+    
+    private func moveCamera(latitude: Double, longitude: Double) {
+        
+    }
+    
+    private func markLocation(latitude: Double, longitude: Double) {
+        let marker = NMFMarker(position: NMGLatLng(lat: latitude, lng: longitude))
+        marker.width = CommonUIConstant.markerWidth
+        marker.height = CommonUIConstant.markerHeight
+        marker.iconImage = CommonUIConstant.markerIconImage
+        marker.mapView = naverMapView.mapView
+    }
+    
+    private func loadFromParkingJsonData() -> ParkinglotDTO? {
+        guard let fileLocation = Bundle.main.url(forResource: "JsonData-Parking", withExtension: "json"),
+              let data = try? String(contentsOf: fileLocation).data(using: .utf8),
+              let parsedData = try? JSONDecoder().decode(ParkinglotDTO.self, from: data)
+        else {
+            print("fileload fail")
+            return nil
+        }
+        
+        return parsedData
     }
     
 }

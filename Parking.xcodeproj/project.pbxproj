@@ -8,17 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		194AEFE112901EAF5AEF1A96 /* Pods_Parking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1F2B3BE3EB48FF6B1FE895 /* Pods_Parking.framework */; };
+		E730172B2A1CA4A3000CFE83 /* JsonData-Parking.json in Resources */ = {isa = PBXBuildFile; fileRef = E730172A2A1CA4A3000CFE83 /* JsonData-Parking.json */; };
 		E764D30A2A171260007BB7F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E764D3092A171260007BB7F4 /* AppDelegate.swift */; };
 		E764D30C2A171260007BB7F4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E764D30B2A171260007BB7F4 /* SceneDelegate.swift */; };
 		E764D3132A171261007BB7F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E764D3122A171261007BB7F4 /* Assets.xcassets */; };
 		E764D3162A171261007BB7F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E764D3142A171261007BB7F4 /* LaunchScreen.storyboard */; };
 		E764D3232A17174D007BB7F4 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E764D3222A17174D007BB7F4 /* MapViewController.swift */; };
+		E7EF0A462A1C9374009AAB29 /* ParkinglotDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EF0A452A1C9374009AAB29 /* ParkinglotDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1F1F2B3BE3EB48FF6B1FE895 /* Pods_Parking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Parking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FA1ED03C528D9A709E4F9AA /* Pods-Parking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parking.release.xcconfig"; path = "Target Support Files/Pods-Parking/Pods-Parking.release.xcconfig"; sourceTree = "<group>"; };
 		7EB0A09AA48E2F8E7EC005AD /* Pods-Parking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parking.debug.xcconfig"; path = "Target Support Files/Pods-Parking/Pods-Parking.debug.xcconfig"; sourceTree = "<group>"; };
+		E730172A2A1CA4A3000CFE83 /* JsonData-Parking.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "JsonData-Parking.json"; sourceTree = "<group>"; };
 		E764D3062A171260007BB7F4 /* Parking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Parking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E764D3092A171260007BB7F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E764D30B2A171260007BB7F4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +29,7 @@
 		E764D3152A171261007BB7F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E764D3172A171261007BB7F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E764D3222A17174D007BB7F4 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		E7EF0A452A1C9374009AAB29 /* ParkinglotDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkinglotDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +94,7 @@
 			children = (
 				E764D3122A171261007BB7F4 /* Assets.xcassets */,
 				E764D3142A171261007BB7F4 /* LaunchScreen.storyboard */,
+				E730172A2A1CA4A3000CFE83 /* JsonData-Parking.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -97,6 +102,7 @@
 		E764D31F2A1712F3007BB7F4 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				E7EF0A3A2A1C5FC5009AAB29 /* Model */,
 				E764D3092A171260007BB7F4 /* AppDelegate.swift */,
 				E764D30B2A171260007BB7F4 /* SceneDelegate.swift */,
 				E764D3212A17139C007BB7F4 /* ViewControllers */,
@@ -118,6 +124,14 @@
 				E764D3222A17174D007BB7F4 /* MapViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E7EF0A3A2A1C5FC5009AAB29 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E7EF0A452A1C9374009AAB29 /* ParkinglotDTO.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E764D3162A171261007BB7F4 /* LaunchScreen.storyboard in Resources */,
+				E730172B2A1CA4A3000CFE83 /* JsonData-Parking.json in Resources */,
 				E764D3132A171261007BB7F4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -237,6 +252,7 @@
 				E764D30A2A171260007BB7F4 /* AppDelegate.swift in Sources */,
 				E764D3232A17174D007BB7F4 /* MapViewController.swift in Sources */,
 				E764D30C2A171260007BB7F4 /* SceneDelegate.swift in Sources */,
+				E7EF0A462A1C9374009AAB29 /* ParkinglotDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
