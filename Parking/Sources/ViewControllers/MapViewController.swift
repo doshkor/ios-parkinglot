@@ -21,6 +21,7 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate {
     
     private let locationManager = CLLocationManager()
     private lazy var naverMapView = NMFNaverMapView(frame: view.frame)
+    private let parkinglotDataManager = ParkinglotDataManager()
     
     // MARK: - Lifecycle
     
@@ -33,19 +34,8 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate {
         // MARK: - 처음 위치로 화면 이동
         moveCameraFirst()
         
-        // MARK: - json 읽어오기
-        let parkingData = loadFromParkingJsonData()
-        if let parkingData {
-            parkingData.records.forEach {
-                if let lat = Double($0.위도), let lon = Double($0.경도) {
-                    markLocation(latitude: lat, longitude: lon)
-                }
-                else {
-                    // 주소 -> 위경도 reverse 필요함
-//                    print("no lat,lon")
-                }
-            }
-        }
+        // MARK: - Marker 표시
+        markAll()
     }
     
     // MARK: - Private function
@@ -98,16 +88,16 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate {
         marker.mapView = naverMapView.mapView
     }
     
-    private func loadFromParkingJsonData() -> ParkinglotDTO? {
-        guard let fileLocation = Bundle.main.url(forResource: "JsonData-Parking", withExtension: "json"),
-              let data = try? String(contentsOf: fileLocation).data(using: .utf8),
-              let parsedData = try? JSONDecoder().decode(ParkinglotDTO.self, from: data)
-        else {
-            print("fileload fail")
-            return nil
-        }
-        
-        return parsedData
+    private func markAll() {
+        let items = parkinglotDataManager.record
+        items?.forEach({ record in
+            if let lat = Double(record.위도), let lon = Double(record.경도) {
+                markLocation(latitude: lat, longitude: lon)
+            }
+            else {
+                print("no lat,lon")
+            }
+        })
     }
     
 }
