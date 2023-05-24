@@ -10,18 +10,33 @@ import NMapsMap
 import CoreLocation
 
 enum CommonUIConstant {
+    
+    // MARK: - Marker
     static let markerWidth:Double = 30
     static let markerHeight:Double = markerWidth * 1.3
-    static let markerIconImage = NMF_MARKER_IMAGE_BLACK
+    static let markerIconImage = NMF_MARKER_IMAGE_GRAY
+    
+    // MARK: - Initail config
+    static let zoomLevelAtFirst = 12.0
+    
 }
 
-class MapViewController: UIViewController, NMFMapViewTouchDelegate {
+class MapViewController: UIViewController {
     
     // MARK: - Private property
-    
     private let locationManager = CLLocationManager()
-    private lazy var naverMapView = NMFNaverMapView(frame: view.frame)
     private let parkinglotDataManager = ParkinglotDataManager()
+    
+    private lazy var naverMapView = NMFNaverMapView(frame: view.frame)
+    
+    private var markers: [NMFMarker] = []
+    private var zoomlevel: Double = CommonUIConstant.zoomLevelAtFirst {
+        didSet {
+            markers.forEach { marker in
+                marker.fitSize(to: zoomlevel)
+            }
+        }
+    }
     
     // MARK: - Lifecycle
     
@@ -41,6 +56,7 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate {
     // MARK: - Private function
     
     private func configure() {
+        naverMapView.mapView.addCameraDelegate(delegate: self)
         configureLocation()
         configureNaverMapView()
     }
@@ -70,7 +86,7 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate {
     private func moveCameraTo(location: NMGLatLng) {
         let param = NMFCameraUpdateParams()
         param.scroll(to: location)
-        param.zoom(to: 12)
+        param.zoom(to: CommonUIConstant.zoomLevelAtFirst)
         param.tilt(to: 0)
         param.rotate(to: 0)
         naverMapView.mapView.moveCamera(NMFCameraUpdate(params: param))
@@ -82,10 +98,10 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate {
     
     private func markLocation(latitude: Double, longitude: Double) {
         let marker = NMFMarker(position: NMGLatLng(lat: latitude, lng: longitude))
-        marker.width = CommonUIConstant.markerWidth
-        marker.height = CommonUIConstant.markerHeight
+        marker.fitSize(to: naverMapView.mapView.zoomLevel)
         marker.iconImage = CommonUIConstant.markerIconImage
         marker.mapView = naverMapView.mapView
+        self.markers.append(marker)
     }
     
     private func markAll() {
@@ -95,9 +111,71 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate {
                 markLocation(latitude: lat, longitude: lon)
             }
             else {
-                print("no lat,lon")
+                // 데이터에 위도,경도가 없는 경우
             }
         })
+    }
+    
+}
+
+// MARK: - Extenstion: NMFMapViewCameraDelegate
+extension MapViewController: NMFMapViewCameraDelegate {
+    
+    func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
+    }
+    
+    func mapView(_ mapView: NMFMapView, cameraIsChangingByReason reason: Int) {
+    }
+    
+    func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
+        if mapView.zoomLevel != self.zoomlevel {
+            self.zoomlevel = mapView.zoomLevel
+        }
+    }
+    
+}
+
+fileprivate extension NMFMarker {
+    
+    func fitSize(to zoomLevel: Double) {
+        switch zoomLevel {
+        case ...5:
+            self.width = 4
+            self.height = 4 * 1.3
+        case 5...6:
+            self.width = 5
+            self.height = 5 * 1.3
+        case 6...7:
+            self.width = 6
+            self.height = 6 * 1.3
+        case 7...8:
+            self.width = 7
+            self.height = 7 * 1.3
+        case 8...9:
+            self.width = 9
+            self.height = 9 * 1.3
+        case 9...10:
+            self.width = 12
+            self.height = 12 * 1.3
+        case 10...11:
+            self.width = 15
+            self.height = 15 * 1.3
+        case 11...12:
+            self.width = 18
+            self.height = 18 * 1.3
+        case 12...13:
+            self.width = 21
+            self.height = 21 * 1.3
+        case 13...14:
+            self.width = 24
+            self.height = 24 * 1.3
+        case 14...:
+            self.width = 27
+            self.height = 27 * 1.3
+        default:
+            self.width = 5
+            self.height = 5
+        }
     }
     
 }
