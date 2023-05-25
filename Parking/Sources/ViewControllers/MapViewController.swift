@@ -9,14 +9,14 @@ import UIKit
 import NMapsMap
 import CoreLocation
 
-enum CommonUIConstant {
+fileprivate enum CommonUIConstant {
     
     // MARK: - Marker
     static let markerWidth:Double = 30
     static let markerHeight:Double = markerWidth * 1.3
     static let markerIconImage = NMF_MARKER_IMAGE_GRAY
     
-    // MARK: - Initail config
+    // MARK: - Initail Config
     static let zoomLevelAtFirst = 12.0
     
 }
@@ -53,6 +53,14 @@ class MapViewController: UIViewController {
         
         // MARK: - Marker 표시
         markAll()
+        
+        searchTextField.delegate = self
+    }
+    
+    // MARK: - Override Function
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
     
     // MARK: - Private function
@@ -134,6 +142,7 @@ class MapViewController: UIViewController {
 }
 
 // MARK: - Extenstion: NMFMapViewCameraDelegate
+
 extension MapViewController: NMFMapViewCameraDelegate {
     
     func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
@@ -150,43 +159,55 @@ extension MapViewController: NMFMapViewCameraDelegate {
     
 }
 
+// MARK: - Extension: UISearchTextFieldDelegate
+extension MapViewController: UISearchTextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchTextField.endEditing(true)
+        return true
+    }
+    
+}
+
+// MARK: - Fileprivate
+
 fileprivate extension NMFMarker {
     
     func fitSize(to zoomLevel: Double) {
         switch zoomLevel {
         case ...5:
+            self.width = 1
+            self.height = 1 * 1.3
+        case 5...6:
+            self.width = 2
+            self.height = 2 * 1.3
+        case 6...7:
+            self.width = 3
+            self.height = 3 * 1.3
+        case 7...8:
             self.width = 4
             self.height = 4 * 1.3
-        case 5...6:
-            self.width = 5
-            self.height = 5 * 1.3
-        case 6...7:
+        case 8...9:
             self.width = 6
             self.height = 6 * 1.3
-        case 7...8:
-            self.width = 7
-            self.height = 7 * 1.3
-        case 8...9:
+        case 9...10:
             self.width = 9
             self.height = 9 * 1.3
-        case 9...10:
+        case 10...11:
             self.width = 12
             self.height = 12 * 1.3
-        case 10...11:
+        case 11...12:
             self.width = 15
             self.height = 15 * 1.3
-        case 11...12:
+        case 12...13:
             self.width = 18
             self.height = 18 * 1.3
-        case 12...13:
+        case 13...14:
             self.width = 21
             self.height = 21 * 1.3
-        case 13...14:
+        case 14...:
             self.width = 24
             self.height = 24 * 1.3
-        case 14...:
-            self.width = 27
-            self.height = 27 * 1.3
         default:
             self.width = 5
             self.height = 5

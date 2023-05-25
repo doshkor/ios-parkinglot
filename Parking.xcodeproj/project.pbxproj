@@ -142,8 +142,8 @@
 		E7EF0A3A2A1C5FC5009AAB29 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E730172D2A1DA30E000CFE83 /* ParkinglotDataManager.swift */,
 				E7EF0A452A1C9374009AAB29 /* ParkinglotDTO.swift */,
+				E730172D2A1DA30E000CFE83 /* ParkinglotDataManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
