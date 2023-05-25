@@ -14,7 +14,8 @@ fileprivate enum CommonUIConstant {
     // MARK: - Marker
     static let markerWidth:Double = 30
     static let markerHeight:Double = markerWidth * 1.3
-    static let markerIconImage = NMF_MARKER_IMAGE_GRAY
+    static let markerIconImage = NMF_MARKER_IMAGE_BLACK
+    static let mainUIColor = UIColor(red: 0, green: 0.196, blue: 0.892, alpha: 1)
     
     // MARK: - Initail Config
     static let zoomLevelAtFirst = 12.0
@@ -28,7 +29,7 @@ class MapViewController: UIViewController {
     private let parkinglotDataManager = ParkinglotDataManager()
     
     private lazy var naverMapView = NMFNaverMapView(frame: view.frame)
-    private let searchTextField = SearchBarTextField(frame: .zero)
+    private let searchBarView = SearchBarView()
     
     private var markers: [NMFMarker] = []
     private var zoomlevel: Double = CommonUIConstant.zoomLevelAtFirst {
@@ -53,8 +54,6 @@ class MapViewController: UIViewController {
         
         // MARK: - Marker 표시
         markAll()
-        
-        searchTextField.delegate = self
     }
     
     // MARK: - Override Function
@@ -66,9 +65,11 @@ class MapViewController: UIViewController {
     // MARK: - Private function
     
     private func configure() {
+        searchBarView.textField.delegate = self
+        
         configureLocation()
         configureNaverMapView()
-        configureUIConstraints()
+        configureAutoLayout()
     }
     
     private func configureLocation() {
@@ -83,14 +84,17 @@ class MapViewController: UIViewController {
         naverMapView.showLocationButton = true
     }
     
-    private func configureUIConstraints() {
-        view.addSubview(searchTextField)
-        searchTextField.translatesAutoresizingMaskIntoConstraints = false
+    private func configureAutoLayout() {
+        view.addSubview(searchBarView)
+        searchBarView.translatesAutoresizingMaskIntoConstraints = false
+        configureConstraints()
+    }
+    
+    private func configureConstraints() {
         NSLayoutConstraint.activate([
-            searchTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            searchTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
-            searchTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
-            searchTextField.heightAnchor.constraint(equalToConstant: 50)
+            searchBarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            searchBarView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
+            searchBarView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
         ])
     }
     
@@ -124,6 +128,7 @@ class MapViewController: UIViewController {
         marker.fitSize(to: naverMapView.mapView.zoomLevel)
         marker.iconImage = CommonUIConstant.markerIconImage
         marker.mapView = naverMapView.mapView
+        marker.iconTintColor = CommonUIConstant.mainUIColor
         self.markers.append(marker)
     }
     
@@ -162,8 +167,18 @@ extension MapViewController: NMFMapViewCameraDelegate {
 // MARK: - Extension: UISearchTextFieldDelegate
 extension MapViewController: UISearchTextFieldDelegate {
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        searchBarView.searchIcon.isHidden = true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField.text == "" {
+            searchBarView.searchIcon.isHidden = false
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        searchTextField.endEditing(true)
+        searchBarView.textField.endEditing(true)
         return true
     }
     
@@ -176,36 +191,42 @@ fileprivate extension NMFMarker {
     func fitSize(to zoomLevel: Double) {
         switch zoomLevel {
         case ...5:
-            self.width = 1
-            self.height = 1 * 1.3
+            self.width = 2
+            self.height = 2 * 1.3
         case 5...6:
             self.width = 2
             self.height = 2 * 1.3
         case 6...7:
-            self.width = 3
-            self.height = 3 * 1.3
+            self.width = 2
+            self.height = 2 * 1.3
         case 7...8:
+            self.width = 2
+            self.height = 2 * 1.3
+        case 8...9:
             self.width = 4
             self.height = 4 * 1.3
-        case 8...9:
-            self.width = 6
-            self.height = 6 * 1.3
         case 9...10:
-            self.width = 9
-            self.height = 9 * 1.3
+            self.width = 7
+            self.height = 7 * 1.3
         case 10...11:
+            self.width = 10
+            self.height = 10 * 1.3
+        case 11...12:
             self.width = 12
             self.height = 12 * 1.3
-        case 11...12:
-            self.width = 15
-            self.height = 15 * 1.3
         case 12...13:
+            self.width = 14
+            self.height = 14 * 1.3
+        case 13...14:
+            self.width = 16
+            self.height = 16 * 1.3
+        case 14...15:
             self.width = 18
             self.height = 18 * 1.3
-        case 13...14:
+        case 15...16:
             self.width = 21
             self.height = 21 * 1.3
-        case 14...:
+        case 16...:
             self.width = 24
             self.height = 24 * 1.3
         default:

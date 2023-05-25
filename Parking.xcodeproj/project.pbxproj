@@ -11,6 +11,7 @@
 		E730172B2A1CA4A3000CFE83 /* JsonData-Parking.json in Resources */ = {isa = PBXBuildFile; fileRef = E730172A2A1CA4A3000CFE83 /* JsonData-Parking.json */; };
 		E730172E2A1DA30E000CFE83 /* ParkinglotDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E730172D2A1DA30E000CFE83 /* ParkinglotDataManager.swift */; };
 		E73017312A1EEC17000CFE83 /* SearchBarTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73017302A1EEC16000CFE83 /* SearchBarTextField.swift */; };
+		E73017332A1F3229000CFE83 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73017322A1F3229000CFE83 /* SearchBarView.swift */; };
 		E764D30A2A171260007BB7F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E764D3092A171260007BB7F4 /* AppDelegate.swift */; };
 		E764D30C2A171260007BB7F4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E764D30B2A171260007BB7F4 /* SceneDelegate.swift */; };
 		E764D3132A171261007BB7F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E764D3122A171261007BB7F4 /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 		E730172A2A1CA4A3000CFE83 /* JsonData-Parking.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "JsonData-Parking.json"; sourceTree = "<group>"; };
 		E730172D2A1DA30E000CFE83 /* ParkinglotDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkinglotDataManager.swift; sourceTree = "<group>"; };
 		E73017302A1EEC16000CFE83 /* SearchBarTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarTextField.swift; sourceTree = "<group>"; };
+		E73017322A1F3229000CFE83 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		E764D3062A171260007BB7F4 /* Parking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Parking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E764D3092A171260007BB7F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E764D30B2A171260007BB7F4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 		E730172F2A1EEBE2000CFE83 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E73017322A1F3229000CFE83 /* SearchBarView.swift */,
 				E73017302A1EEC16000CFE83 /* SearchBarTextField.swift */,
 			);
 			path = Views;
@@ -266,6 +269,7 @@
 				E764D30A2A171260007BB7F4 /* AppDelegate.swift in Sources */,
 				E764D3232A17174D007BB7F4 /* MapViewController.swift in Sources */,
 				E730172E2A1DA30E000CFE83 /* ParkinglotDataManager.swift in Sources */,
+				E73017332A1F3229000CFE83 /* SearchBarView.swift in Sources */,
 				E764D30C2A171260007BB7F4 /* SceneDelegate.swift in Sources */,
 				E7EF0A462A1C9374009AAB29 /* ParkinglotDTO.swift in Sources */,
 				E73017312A1EEC17000CFE83 /* SearchBarTextField.swift in Sources */,

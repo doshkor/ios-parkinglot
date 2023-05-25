@@ -10,6 +10,7 @@ import UIKit
 fileprivate enum Constants {
     
     static let koreanLanguage = "ko-KR"
+    static let placeholderText = "주차장 이름, 주소를 검색해 보세요!"
     
 }
 
@@ -54,20 +55,12 @@ class SearchBarTextField: UITextField {
         font = UIFont.systemFont(ofSize: 17)
         textColor = .black
         
-        backgroundColor = .white
-        
-        let placeholderText = "어디로 갈까요?"
+        let placeholderText = Constants.placeholderText
         let attributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.gray,
             .font: UIFont.systemFont(ofSize: 17)
         ]
         attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: attributes)
-        
-        
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 2)
-        layer.shadowRadius = 4
-        layer.shadowOpacity = 0.3
         
         // text 입력 자동으로 바뀌는 현상 제거, ex) appld -> applied
         autocorrectionType = .no
