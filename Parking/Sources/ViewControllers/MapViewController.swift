@@ -28,6 +28,7 @@ class MapViewController: UIViewController {
     private let parkinglotDataManager = ParkinglotDataManager()
     
     private lazy var naverMapView = NMFNaverMapView(frame: view.frame)
+    private let searchTextField = SearchTextField(frame: .zero)
     
     private var markers: [NMFMarker] = []
     private var zoomlevel: Double = CommonUIConstant.zoomLevelAtFirst {
@@ -47,6 +48,7 @@ class MapViewController: UIViewController {
         configure()
         
         // MARK: - 처음 위치로 화면 이동
+        
         moveCameraFirst()
         
         // MARK: - Marker 표시
@@ -56,9 +58,9 @@ class MapViewController: UIViewController {
     // MARK: - Private function
     
     private func configure() {
-        naverMapView.mapView.addCameraDelegate(delegate: self)
         configureLocation()
         configureNaverMapView()
+        configureUIConstraints()
     }
     
     private func configureLocation() {
@@ -66,9 +68,22 @@ class MapViewController: UIViewController {
     }
     
     private func configureNaverMapView() {
+        naverMapView.mapView.addCameraDelegate(delegate: self)
+        
         view.addSubview(naverMapView)
         naverMapView.showCompass = true
         naverMapView.showLocationButton = true
+    }
+    
+    private func configureUIConstraints() {
+        view.addSubview(searchTextField)
+        searchTextField.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            searchTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            searchTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
+            searchTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
+            searchTextField.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
     
     private func moveCameraFirst() {
