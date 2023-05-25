@@ -28,7 +28,7 @@ class MapViewController: UIViewController {
     private let parkinglotDataManager = ParkinglotDataManager()
     
     private lazy var naverMapView = NMFNaverMapView(frame: view.frame)
-    private let searchTextField = SearchTextField(frame: .zero)
+    private let searchTextField = SearchBarTextField(frame: .zero)
     
     private var markers: [NMFMarker] = []
     private var zoomlevel: Double = CommonUIConstant.zoomLevelAtFirst {

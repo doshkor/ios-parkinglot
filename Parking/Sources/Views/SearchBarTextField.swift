@@ -1,5 +1,5 @@
 //
-//  SearchTextField.swift
+//  SearchBarTextField.swift
 //  Parking
 //
 //  Created by 신동오 on 2023/05/25.
@@ -13,7 +13,7 @@ fileprivate enum Constants {
     
 }
 
-class SearchTextField: UITextField {
+class SearchBarTextField: UITextField {
     
     // MARK: - Public Property
     
@@ -55,7 +55,6 @@ class SearchTextField: UITextField {
         textColor = .black
         
         backgroundColor = .white
-        borderStyle = .roundedRect
         
         let placeholderText = "어디로 갈까요?"
         let attributes: [NSAttributedString.Key: Any] = [
@@ -78,6 +77,7 @@ class SearchTextField: UITextField {
         
         // 입력시 삭제 버튼 추가
         clearButtonMode = .always
+        // rightView 입력시 안된다???~
     }
     
 }
