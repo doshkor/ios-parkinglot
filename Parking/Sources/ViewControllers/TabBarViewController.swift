@@ -11,11 +11,11 @@ class TabBarViewController: UITabBarController {
     
     // MARK: - Private Property
     
-    private let viewController1 = UIViewController()
+    private let viewController1 = FavoriteViewController()
     private let viewController2 = MapViewController()
     private let viewController3 = UIViewController()
 
-    // MARK: - Lifecycle
+    // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +49,6 @@ class TabBarViewController: UITabBarController {
     }
     
     private func configureUI() {
-        viewController1.view.backgroundColor = .yellow
         viewController3.view.backgroundColor = .blue
         
         tabBar.tintColor = UIConstant.mainUIColor

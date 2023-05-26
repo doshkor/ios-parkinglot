@@ -40,7 +40,7 @@ class MapViewController: UIViewController {
         }
     }
     
-    // MARK: - Lifecycle
+    // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
