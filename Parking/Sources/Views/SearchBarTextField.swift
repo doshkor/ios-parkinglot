@@ -29,9 +29,6 @@ class SearchBarTextField: UITextField {
         return super.textInputMode
     }
     
-    // MARK: - Public Property
-    
-    
     // MARK: - Required Init
     
     required init?(coder: NSCoder) {

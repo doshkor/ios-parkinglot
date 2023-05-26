@@ -14,11 +14,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        // mapVC 를 루트뷰로 설정
+        // 탭바 컨트롤러 생성
+        let tabBarController = TabBarViewController()
+   
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = MapViewController()
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
-        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
