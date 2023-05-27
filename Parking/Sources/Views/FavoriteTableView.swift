@@ -51,13 +51,14 @@ class FavoriteTableView: UITableView {
     // MARK: - Private Function
     
     private func configure() {
-        register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        register(FavoriteTableViewCell  .self, forCellReuseIdentifier: FavoriteTableViewCell.reuseIdentifier)
         
         configureUI()
     }
     
     private func configureUI(){
         backgroundColor = UIConstant.favoriteTableViewColor
+        separatorStyle = .none
     }
     
 }

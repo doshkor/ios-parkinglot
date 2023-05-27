@@ -14,10 +14,21 @@ struct Item: Hashable {
 
 class FavoriteViewController: UIViewController {
     
+    let testData: ParkinglotDTO? = {
+        guard let fileLocation = Bundle.main.url(forResource: "FavoriteMock", withExtension: "json"),
+              let data = try? String(contentsOf: fileLocation).data(using: .utf8),
+              let parsedData = try? JSONDecoder().decode(ParkinglotDTO.self, from: data)
+        else {
+            return nil
+        }
+        
+        return parsedData
+    }()
+    
     // MARK: - Private Property
     
     private let tableView = FavoriteTableView()
-    private var dataSource: UITableViewDiffableDataSource<Int, Item>!
+    private var dataSource: UITableViewDiffableDataSource<Int, Record>!
 
     // MARK: - LifeCycle
     
@@ -32,29 +43,31 @@ class FavoriteViewController: UIViewController {
         configureDataSource()
         configureUI()
         configureAutoLayout()
+        tableView.delegate = self
     }
     
     private func configureDataSource() {
         
-        dataSource = UITableViewDiffableDataSource<Int, Item>(tableView: tableView) { tableView, indexPath, item in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            cell.textLabel?.text = item.title
+        dataSource = UITableViewDiffableDataSource<Int, Record>(tableView: tableView) { tableView, indexPath, item in
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteTableViewCell.reuseIdentifier, for: indexPath) as? FavoriteTableViewCell else { return UITableViewCell() }
+            
+//            cell.nameLabel.text = item.주차장명
+//            cell.addressLabel.text = item.소재지도로명주소
+            
+//            NSLayoutConstraint.activate([
+//                cell.leadingAnchor.constraint(equalTo: tableView.leadingAnchor, constant: 20),
+//                cell.trailingAnchor.constraint(equalTo: tableView.trailingAnchor, constant: -20)
+//            ])
+            
             return cell
         }
         
         tableView.dataSource = dataSource
-
-        // 데이터 생성
-        let items = [
-            Item(id: 1, title: "Item 1"),
-            Item(id: 2, title: "Item 2"),
-            Item(id: 3, title: "Item 3")
-        ]
         
         // 스냅샷 생성
-        var snapshot = NSDiffableDataSourceSnapshot<Int, Item>()
+        var snapshot = NSDiffableDataSourceSnapshot<Int, Record>()
         snapshot.appendSections([0])
-        snapshot.appendItems(items)
+        snapshot.appendItems(testData!.records)
         
         // 스냅샷 적용
         dataSource.apply(snapshot, animatingDifferences: true)
@@ -81,16 +94,12 @@ class FavoriteViewController: UIViewController {
     
 }
 
-// MARK: - Extension: UITableViewDataSource
+// MARK: - Extension: UITableViewDelegate
 
-extension FavoriteViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
-    }
+extension FavoriteViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") else { return UITableViewCell() }
-        return cell
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 110
     }
     
 }
