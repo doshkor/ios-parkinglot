@@ -16,56 +16,25 @@ class FavoriteViewController: UIViewController {
     
     // MARK: - Private Property
     
-    private let tableView = UITableView()
+    private let tableView = FavoriteTableView()
     private var dataSource: UITableViewDiffableDataSource<Int, Item>!
 
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setup()
         configure()
-        
-        view.backgroundColor = .white
-        
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        tableView.backgroundColor = UIColor(red: 0.914, green: 0.925, blue: 0.937, alpha: 1)
-        
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 44))
-        headerView.backgroundColor = UIColor(red: 0.992, green: 0.992, blue: 0.992, alpha: 1)
-        
-        let headerText = UILabel()
-        headerView.addSubview(headerText)
-        headerText.text = "즐겨찾기"
-        headerText.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        headerText.textAlignment = .center
-        headerText.translatesAutoresizingMaskIntoConstraints = false
-        headerText.centerXAnchor.constraint(equalTo: headerView.centerXAnchor).isActive = true
-        headerText.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
-
-        tableView.tableHeaderView = headerView
     }
     
+    // MARK: - Private Function
+    
     private func configure() {
+        configureDataSource()
+        configureUI()
         configureAutoLayout()
     }
     
-    private func configureAutoLayout() {
-        view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        configureConstraints()
-    }
-    
-    private func configureConstraints() {
-        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-    }
-    
-    private func setup() {
+    private func configureDataSource() {
         
         dataSource = UITableViewDiffableDataSource<Int, Item>(tableView: tableView) { tableView, indexPath, item in
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
@@ -89,6 +58,25 @@ class FavoriteViewController: UIViewController {
         
         // 스냅샷 적용
         dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    private func configureUI() {
+        view.backgroundColor = .white
+    }
+    
+    private func configureAutoLayout() {
+        view.addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        configureConstraints()
+    }
+    
+    private func configureConstraints() {
+        tableView.configureAutoLayout()
+        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
 }
