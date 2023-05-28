@@ -27,6 +27,7 @@ class FavoriteViewController: UIViewController {
     
     // MARK: - Private Property
     
+    private let titleView = FavoriteTitleView()
     private let tableView = FavoriteTableView()
     private var dataSource: UITableViewDiffableDataSource<Int, Record>!
 
@@ -42,12 +43,11 @@ class FavoriteViewController: UIViewController {
     private func configure() {
         configureDataSource()
         configureUI()
-        configureAutoLayout()
+        configureHierarchy()
         tableView.delegate = self
     }
     
     private func configureDataSource() {
-        
         dataSource = UITableViewDiffableDataSource<Int, Record>(tableView: tableView) { tableView, indexPath, item in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteTableViewCell.reuseIdentifier, for: indexPath) as? FavoriteTableViewCell else { return UITableViewCell() }
             
@@ -77,19 +77,28 @@ class FavoriteViewController: UIViewController {
         view.backgroundColor = .white
     }
     
-    private func configureAutoLayout() {
+    private func configureHierarchy() {
+        view.addSubview(titleView)
+        titleView.translatesAutoresizingMaskIntoConstraints = false
+        
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
-        configureConstraints()
+        configureSubviewsConstraints()
     }
     
-    private func configureConstraints() {
-        tableView.configureAutoLayout()
-        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    private func configureSubviewsConstraints() {
+        NSLayoutConstraint.activate([
+            titleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            titleView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            titleView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            titleView.heightAnchor.constraint(equalToConstant: 44),
+            
+            tableView.topAnchor.constraint(equalTo: titleView.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        ])
     }
     
 }

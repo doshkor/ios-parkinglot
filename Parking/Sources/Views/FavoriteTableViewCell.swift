@@ -73,6 +73,8 @@ class FavoriteTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    // MARK: - Init
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configure()
@@ -85,21 +87,26 @@ class FavoriteTableViewCell: UITableViewCell {
     // MARK: - Private Function
     
     private func configure() {
-        
+        configureUI()
+        configureHierarchy()
+    }
+    
+    private func configureUI() {
         self.contentView.backgroundColor = UIConstant.favoriteTableViewColor
-        
+    }
+    
+    private func configureHierarchy() {
         contentView.addSubview(favoriteView)
         favoriteView.translatesAutoresizingMaskIntoConstraints = false
         
         contentView.addSubview(photoIamgeView)
         photoIamgeView.translatesAutoresizingMaskIntoConstraints = false
         
-//        contentView.addSubview(textStackView)
-//        textStackView.translatesAutoresizingMaskIntoConstraints = false
-        
+        configureSubviewsConstraints()
+    }
+    
+    private func configureSubviewsConstraints() {
         NSLayoutConstraint.activate([
-            
-            
             favoriteView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 5),
             favoriteView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20),
             favoriteView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20),
@@ -109,7 +116,6 @@ class FavoriteTableViewCell: UITableViewCell {
             photoIamgeView.bottomAnchor.constraint(equalTo: self.favoriteView.bottomAnchor, constant: -20),
             photoIamgeView.leadingAnchor.constraint(equalTo: self.favoriteView.leadingAnchor, constant: 10),
             photoIamgeView.widthAnchor.constraint(equalToConstant: self.frame.width * 27 / 100),
-            
         ])
     }
     

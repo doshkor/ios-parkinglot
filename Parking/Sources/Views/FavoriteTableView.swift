@@ -9,23 +9,6 @@ import UIKit
 
 class FavoriteTableView: UITableView {
     
-    // MARK: - Private Property
-    
-    private lazy var headerView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 44))
-        view.backgroundColor = UIConstant.favoriteTableViewHeaderColor
-        return view
-    }()
-    
-    private lazy var headerText: UILabel = {
-       let label = UILabel()
-        label.text = "즐겨찾기"
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        label.textAlignment = .center
-        return label
-    }()
-    
     // MARK: - Init
     
     init() {
@@ -37,28 +20,18 @@ class FavoriteTableView: UITableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Public Function
-    
-    func configureAutoLayout() {
-        tableHeaderView = headerView
-        
-        headerView.addSubview(headerText)
-        headerText.translatesAutoresizingMaskIntoConstraints = false
-        headerText.centerXAnchor.constraint(equalTo: headerView.centerXAnchor).isActive = true
-        headerText.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
-    }
-    
     // MARK: - Private Function
     
     private func configure() {
-        register(FavoriteTableViewCell  .self, forCellReuseIdentifier: FavoriteTableViewCell.reuseIdentifier)
+        register(FavoriteTableViewCell.self, forCellReuseIdentifier: FavoriteTableViewCell.reuseIdentifier)
         
         configureUI()
     }
     
     private func configureUI(){
-        backgroundColor = UIConstant.favoriteTableViewColor
         separatorStyle = .none
+        contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        backgroundColor = UIConstant.favoriteTableViewColor
     }
     
 }
