@@ -44,6 +44,7 @@ class FavoriteTableViewCell: UITableViewCell {
     let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "능곡역 주차장"
+        label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         return label
     }()

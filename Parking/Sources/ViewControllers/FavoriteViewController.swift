@@ -67,7 +67,10 @@ class FavoriteViewController: UIViewController {
         // 스냅샷 생성
         var snapshot = NSDiffableDataSourceSnapshot<Int, Record>()
         snapshot.appendSections([0])
-        snapshot.appendItems(testData!.records)
+        if let testData = testData {
+            snapshot.appendItems(testData.records)
+        }
+        else {}
         
         // 스냅샷 적용
         dataSource.apply(snapshot, animatingDifferences: true)
