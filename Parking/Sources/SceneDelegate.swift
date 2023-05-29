@@ -14,8 +14,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        // 탭바 컨트롤러 생성
+        
         let tabBarController = TabBarViewController()
+        
+        if let mapViewController = tabBarController.viewControllers?[safe: 1] {
+            tabBarController.selectedViewController = mapViewController
+        }
    
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = tabBarController
@@ -53,3 +57,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+fileprivate extension Array {
+    
+    subscript (safe index: Int) -> Element? {
+        return indices ~= index ? self[index] : nil
+    }
+    
+}

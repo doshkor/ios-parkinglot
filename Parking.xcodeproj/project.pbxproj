@@ -114,7 +114,6 @@
 		E764D3082A171260007BB7F4 /* Parking */ = {
 			isa = PBXGroup;
 			children = (
-				E774953B2A204D50002363A9 /* Common */,
 				E764D31F2A1712F3007BB7F4 /* Sources */,
 				E764D31D2A1712A1007BB7F4 /* Resources */,
 				E764D3202A17136B007BB7F4 /* Supporting Files */,
@@ -136,9 +135,10 @@
 		E764D31F2A1712F3007BB7F4 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				E774953B2A204D50002363A9 /* Common */,
+				E7EF0A3A2A1C5FC5009AAB29 /* Model */,
 				E764D3092A171260007BB7F4 /* AppDelegate.swift */,
 				E764D30B2A171260007BB7F4 /* SceneDelegate.swift */,
-				E7EF0A3A2A1C5FC5009AAB29 /* Model */,
 				E764D3212A17139C007BB7F4 /* ViewControllers */,
 				E730172F2A1EEBE2000CFE83 /* Views */,
 			);

@@ -9,20 +9,11 @@ import UIKit
 import NMapsMap
 import CoreLocation
 
-fileprivate enum CommonUIConstant {
-    
-    // MARK: - Marker
-    static let markerWidth:Double = 30
-    static let markerHeight:Double = markerWidth * 1.3
-    static let markerIconImage = NMF_MARKER_IMAGE_BLACK
-    static let mainUIColor = UIColor(red: 0, green: 0.196, blue: 0.892, alpha: 1)
-    
-    // MARK: - Initail Config
-    static let zoomLevelAtFirst = 12.0
-    
-}
-
 class MapViewController: UIViewController {
+    
+    private enum LocalConstant {
+        static let zoomLevelAtFirst = 12.0
+    }
     
     // MARK: - Private property
     private let locationManager = CLLocationManager()
@@ -32,7 +23,7 @@ class MapViewController: UIViewController {
     private let searchBarView = SearchBarView()
     
     private var markers: [NMFMarker] = []
-    private var zoomlevel: Double = CommonUIConstant.zoomLevelAtFirst {
+    private var zoomlevel: Double = LocalConstant.zoomLevelAtFirst {
         didSet {
             markers.forEach { marker in
                 marker.fitSize(to: zoomlevel)
@@ -113,7 +104,7 @@ class MapViewController: UIViewController {
     private func moveCameraTo(location: NMGLatLng) {
         let param = NMFCameraUpdateParams()
         param.scroll(to: location)
-        param.zoom(to: CommonUIConstant.zoomLevelAtFirst)
+        param.zoom(to: LocalConstant.zoomLevelAtFirst)
         param.tilt(to: 0)
         param.rotate(to: 0)
         naverMapView.mapView.moveCamera(NMFCameraUpdate(params: param))
@@ -126,9 +117,9 @@ class MapViewController: UIViewController {
     private func markLocation(latitude: Double, longitude: Double) {
         let marker = NMFMarker(position: NMGLatLng(lat: latitude, lng: longitude))
         marker.fitSize(to: naverMapView.mapView.zoomLevel)
-        marker.iconImage = CommonUIConstant.markerIconImage
+        marker.iconImage = UIConstant.markerIconImage
         marker.mapView = naverMapView.mapView
-        marker.iconTintColor = CommonUIConstant.mainUIColor
+        marker.iconTintColor = UIConstant.mainUIColor
         self.markers.append(marker)
     }
     
