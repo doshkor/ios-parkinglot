@@ -22,6 +22,14 @@ class MapViewController: UIViewController {
     private lazy var naverMapView = NMFNaverMapView(frame: view.frame)
     private let searchBarView = SearchBarView()
     
+    private var selectedMarker: NMFMarker? {
+        didSet {
+            oldValue?.iconImage = UIConstant.markerIconImage
+        }
+        willSet {
+            newValue?.iconImage = UIConstant.markerSelectedIconImage
+        }
+    }
     private var markers: [NMFMarker] = []
     private var zoomlevel: Double = LocalConstant.zoomLevelAtFirst {
         didSet {
@@ -135,6 +143,7 @@ class MapViewController: UIViewController {
 
         marker.touchHandler = { (overlay) in
             print(parkinglotName)
+            self.selectedMarker = marker
             return true
         }
 
