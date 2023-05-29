@@ -60,7 +60,7 @@ class MapViewController: UIViewController {
         
         configureLocation()
         configureNaverMapView()
-        configureAutoLayout()
+        configureHierarchy()
     }
     
     private func configureLocation() {
@@ -70,18 +70,20 @@ class MapViewController: UIViewController {
     private func configureNaverMapView() {
         naverMapView.mapView.addCameraDelegate(delegate: self)
         
-        view.addSubview(naverMapView)
         naverMapView.showCompass = true
         naverMapView.showLocationButton = true
     }
     
-    private func configureAutoLayout() {
+    private func configureHierarchy() {
+        view.addSubview(naverMapView)
+        
         view.addSubview(searchBarView)
         searchBarView.translatesAutoresizingMaskIntoConstraints = false
-        configureConstraints()
+        
+        configureSubviewsConstraints()
     }
     
-    private func configureConstraints() {
+    private func configureSubviewsConstraints() {
         NSLayoutConstraint.activate([
             searchBarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             searchBarView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
@@ -114,15 +116,6 @@ class MapViewController: UIViewController {
         
     }
     
-    private func markLocation(latitude: Double, longitude: Double) {
-        let marker = NMFMarker(position: NMGLatLng(lat: latitude, lng: longitude))
-        marker.fitSize(to: naverMapView.mapView.zoomLevel)
-        marker.iconImage = UIConstant.markerIconImage
-        marker.mapView = naverMapView.mapView
-        marker.iconTintColor = UIConstant.mainUIColor
-        self.markers.append(marker)
-    }
-    
     private func markAll() {
         let items = parkinglotDataManager.record
         items?.forEach({ record in
@@ -134,6 +127,16 @@ class MapViewController: UIViewController {
             }
         })
     }
+    
+    private func markLocation(latitude: Double, longitude: Double) {
+        let marker = NMFMarker(position: NMGLatLng(lat: latitude, lng: longitude))
+        marker.fitSize(to: naverMapView.mapView.zoomLevel)
+        marker.iconImage = UIConstant.markerIconImage
+        marker.mapView = naverMapView.mapView
+        marker.iconTintColor = UIConstant.mainUIColor
+        markers.append(marker)
+    }
+    
     
 }
 
@@ -148,8 +151,8 @@ extension MapViewController: NMFMapViewCameraDelegate {
     }
     
     func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
-        if mapView.zoomLevel != self.zoomlevel {
-            self.zoomlevel = mapView.zoomLevel
+        if mapView.zoomLevel != zoomlevel {
+            zoomlevel = mapView.zoomLevel
         }
     }
     
