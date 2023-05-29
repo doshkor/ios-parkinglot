@@ -9,11 +9,11 @@ import UIKit
 import NMapsMap
 import CoreLocation
 
+fileprivate enum LocalConstant {
+    static let zoomLevelAtFirst = 12.0
+}
+
 class MapViewController: UIViewController {
-    
-    private enum LocalConstant {
-        static let zoomLevelAtFirst = 12.0
-    }
     
     // MARK: - Private property
     private let locationManager = CLLocationManager()
@@ -26,7 +26,7 @@ class MapViewController: UIViewController {
     private var zoomlevel: Double = LocalConstant.zoomLevelAtFirst {
         didSet {
             markers.forEach { marker in
-                marker.fitSize(to: zoomlevel)
+                marker.fitSize(accordingTo: zoomlevel)
             }
         }
     }
@@ -118,25 +118,30 @@ class MapViewController: UIViewController {
     
     private func markAll() {
         let items = parkinglotDataManager.record
-        items?.forEach({ record in
-            if let lat = Double(record.위도), let lon = Double(record.경도) {
-                markLocation(latitude: lat, longitude: lon)
-            }
-            else {
-                // 데이터에 위도,경도가 없는 경우
-            }
-        })
+        items?.forEach {
+            markLocation(of: $0)
+        }
     }
     
-    private func markLocation(latitude: Double, longitude: Double) {
-        let marker = NMFMarker(position: NMGLatLng(lat: latitude, lng: longitude))
-        marker.fitSize(to: naverMapView.mapView.zoomLevel)
-        marker.iconImage = UIConstant.markerIconImage
+    private func markLocation(of record: Record) {
+        guard let marker = NMFMarker(record: record) else {
+            return
+        }
+        
+        let parkinglotName = record.주차장명.contains("주차장") ? record.주차장명 : record.주차장명 + "주차장"
+        marker.captionText = parkinglotName
+        
+        marker.fitSize(accordingTo: naverMapView.mapView.zoomLevel)
+
+        marker.touchHandler = { (overlay) in
+            print(parkinglotName)
+            return true
+        }
+
         marker.mapView = naverMapView.mapView
-        marker.iconTintColor = UIConstant.mainUIColor
+        
         markers.append(marker)
     }
-    
     
 }
 
@@ -182,7 +187,21 @@ extension MapViewController: UISearchTextFieldDelegate {
 
 fileprivate extension NMFMarker {
     
-    func fitSize(to zoomLevel: Double) {
+    // MARK: - Init
+    
+    convenience init?(record: Record) {
+        if let 위도 = Double(record.위도), let 경도 = Double(record.경도) {
+            self.init(position: NMGLatLng(lat: 위도, lng: 경도))
+            configureAttributes()
+        }
+        else {
+            return nil
+        }
+    }
+    
+    // MARK: - Public Function
+    
+    func fitSize(accordingTo zoomLevel: Double) {
         switch zoomLevel {
         case ...5:
             self.width = 2
@@ -227,6 +246,18 @@ fileprivate extension NMFMarker {
             self.width = 5
             self.height = 5
         }
+    }
+    
+    // MARK: - Private Function
+    
+    private func configureAttributes() {
+        isHideCollidedCaptions = true
+        isHideCollidedSymbols = true
+        
+        iconTintColor = UIConstant.mainUIColor
+        iconImage = UIConstant.markerIconImage
+        
+        captionMinZoom = LocalConstant.zoomLevelAtFirst
     }
     
 }
