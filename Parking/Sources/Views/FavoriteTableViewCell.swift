@@ -18,21 +18,21 @@ class FavoriteTableViewCell: UITableViewCell {
         return view
     }()
     
-    let photoIamgeView: UIImageView = {
+    let photoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "car.top.radiowaves.rear.left.and.rear.right")
         imageView.layer.cornerRadius = 15
         return imageView
     }()
     
-    private let iconBackgroundView: UIView = {
+    let iconBackgroundView: UIView = {
         let view = UIView(frame: .init(x: 0, y: 0, width: 20, height: 20))
         view.layer.cornerRadius = view.bounds.size.width/2
         view.backgroundColor = UIConstant.mainUIColor
         return view
     }()
     
-    private let iconTextLabel: UILabel = {
+    let iconTextLabel: UILabel = {
         let label = UILabel()
         label.text = "유"
         label.textColor = .white
@@ -105,8 +105,8 @@ class FavoriteTableViewCell: UITableViewCell {
         contentView.addSubview(cellBackgroundView)
         cellBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         
-        contentView.addSubview(photoIamgeView)
-        photoIamgeView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(photoImageView)
+        photoImageView.translatesAutoresizingMaskIntoConstraints = false
         
         contentView.addSubview(iconBackgroundView)
         iconBackgroundView.translatesAutoresizingMaskIntoConstraints = false
@@ -133,13 +133,13 @@ class FavoriteTableViewCell: UITableViewCell {
             cellBackgroundView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20),
             cellBackgroundView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -5),
             
-            photoIamgeView.topAnchor.constraint(equalTo: self.cellBackgroundView.topAnchor, constant: 20),
-            photoIamgeView.bottomAnchor.constraint(equalTo: self.cellBackgroundView.bottomAnchor, constant: -20),
-            photoIamgeView.leadingAnchor.constraint(equalTo: self.cellBackgroundView.leadingAnchor, constant: 10),
-            photoIamgeView.widthAnchor.constraint(equalToConstant: self.frame.width * 27 / 100),
+            photoImageView.topAnchor.constraint(equalTo: self.cellBackgroundView.topAnchor, constant: 20),
+            photoImageView.bottomAnchor.constraint(equalTo: self.cellBackgroundView.bottomAnchor, constant: -20),
+            photoImageView.leadingAnchor.constraint(equalTo: self.cellBackgroundView.leadingAnchor, constant: 10),
+            photoImageView.widthAnchor.constraint(equalToConstant: self.frame.width * 27 / 100),
             
             iconBackgroundView.topAnchor.constraint(equalTo: cellBackgroundView.topAnchor, constant: 27),
-            iconBackgroundView.leadingAnchor.constraint(equalTo: photoIamgeView.trailingAnchor, constant: 15),
+            iconBackgroundView.leadingAnchor.constraint(equalTo: photoImageView.trailingAnchor, constant: 15),
             iconBackgroundView.widthAnchor.constraint(equalToConstant: 20),
             iconBackgroundView.heightAnchor.constraint(equalToConstant: 20),
             

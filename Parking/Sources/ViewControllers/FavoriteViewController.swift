@@ -63,12 +63,38 @@ class FavoriteViewController: UIViewController {
         dataSource = UITableViewDiffableDataSource<Int, Record>(tableView: tableView) { tableView, indexPath, item in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteTableViewCell.reuseIdentifier, for: indexPath) as? FavoriteTableViewCell else { return UITableViewCell() }
             
-            cell.nameLabel.text = item.주차장명
-            cell.addressLabel.text = item.소재지도로명주소
-            cell.informationLabel.text = item.주차장구분 + " / " + item.요금정보 + " / " + item.결제방법
             
-            let index = indexPath.row % 3
-            cell.photoIamgeView.image = self.testImages[index]
+            
+            let randomInt = Int.random(in: 1...3)
+            cell.photoImageView.image = UIImage(named: "parkinglot-image\(randomInt)")
+            cell.nameLabel.text = item.주차장명.contains("주차장") ? item.주차장명 : item.주차장명 + "주차장"
+            cell.addressLabel.text = item.소재지도로명주소 != "" ? item.소재지도로명주소 : item.소재지지번주소
+            var informationText: String = ""
+            if item.주차장구분 != "" {
+                informationText += item.주차장구분
+            }
+            if item.요금정보 != "" {
+                informationText += " / \(item.요금정보)"
+            }
+            if item.추가단위시간 != "" && item.추가단위시간 != "0" && item.추가단위요금 != "" && item.추가단위요금 != "0" {
+                informationText += " / \(item.추가단위시간)분 \(item.추가단위요금)원"
+            }
+            cell.informationLabel.text = informationText
+            
+            switch item.요금정보 {
+            case "유료":
+                cell.iconBackgroundView.backgroundColor = UIConstant.mainUIColor
+                cell.iconTextLabel.text = "유"
+                cell.iconTextLabel.textColor = .white
+            case "무료":
+                cell.iconBackgroundView.backgroundColor = .white
+                cell.iconBackgroundView.layer.borderWidth = 1
+                cell.iconBackgroundView.layer.borderColor = UIConstant.mainUIColor.cgColor
+                cell.iconTextLabel.text = "무"
+                cell.iconTextLabel.textColor = UIConstant.mainUIColor
+            default:
+                break
+            }
             
             return cell
         }
