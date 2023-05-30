@@ -129,6 +129,18 @@ class ParkinglotDetailModalViewController: UIViewController {
     
     // MARK: - Private Function
     
+    private func setupView() {
+        view.backgroundColor = .clear
+        
+        let dimmedViewTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedDimmedView))
+        dimmedView.isUserInteractionEnabled = true
+        dimmedView.addGestureRecognizer(dimmedViewTapGestureRecognizer)
+    }
+    
+    @objc private func tappedDimmedView() {
+        animateDismissView()
+    }
+    
     private func setupPanGesture() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handlePanGesture(gesture:)))
         panGesture.delaysTouchesBegan = false
@@ -168,10 +180,6 @@ class ParkinglotDetailModalViewController: UIViewController {
             self.view.layoutIfNeeded()
         }
         currentContainerHeight = height
-    }
-    
-    private func setupView() {
-        view.backgroundColor = .clear
     }
     
     private func animatePresentContainer() {
