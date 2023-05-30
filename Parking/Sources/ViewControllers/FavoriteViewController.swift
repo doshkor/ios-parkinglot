@@ -14,6 +14,18 @@ struct Item: Hashable {
 
 class FavoriteViewController: UIViewController {
     
+    let testImages: [UIImage] = {
+        var images: [UIImage] = []
+        guard let image1 = UIImage(named: "parkinglot-image1"),
+              let image2 = UIImage(named: "parkinglot-image2"),
+              let image3 = UIImage(named: "parkinglot-image3")
+        else {
+            return []
+        }
+        images = [image1, image2, image3]
+        return images
+    }()
+    
     let testData: ParkinglotDTO? = {
         guard let fileLocation = Bundle.main.url(forResource: "FavoriteMock", withExtension: "json"),
               let data = try? String(contentsOf: fileLocation).data(using: .utf8),
@@ -38,7 +50,7 @@ class FavoriteViewController: UIViewController {
         configure()
     }
     
-    // MARK: - Private Function
+    // MARK: - Private Functionas
     
     private func configure() {
         configureDataSource()
@@ -51,13 +63,12 @@ class FavoriteViewController: UIViewController {
         dataSource = UITableViewDiffableDataSource<Int, Record>(tableView: tableView) { tableView, indexPath, item in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteTableViewCell.reuseIdentifier, for: indexPath) as? FavoriteTableViewCell else { return UITableViewCell() }
             
-//            cell.nameLabel.text = item.주차장명
-//            cell.addressLabel.text = item.소재지도로명주소
+            cell.nameLabel.text = item.주차장명
+            cell.addressLabel.text = item.소재지도로명주소
+            cell.informationLabel.text = item.주차장구분 + " / " + item.요금정보 + " / " + item.결제방법
             
-//            NSLayoutConstraint.activate([
-//                cell.leadingAnchor.constraint(equalTo: tableView.leadingAnchor, constant: 20),
-//                cell.trailingAnchor.constraint(equalTo: tableView.trailingAnchor, constant: -20)
-//            ])
+            let index = indexPath.row % 3
+            cell.photoIamgeView.image = self.testImages[index]
             
             return cell
         }
