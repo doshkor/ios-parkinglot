@@ -151,7 +151,7 @@ class MapViewController: UIViewController {
         vc.modalPresentationStyle = .overCurrentContext
         
         let randomInt = Int.random(in: 1...3)
-        vc.photoIamgeView.image = UIImage(named: "parkinglot-image\(randomInt)")
+        vc.photoImageView.image = UIImage(named: "parkinglot-image\(randomInt)")
         vc.nameLabel.text = record.주차장명.contains("주차장") ? record.주차장명 : record.주차장명 + "주차장"
         vc.addressLabel.text = record.소재지도로명주소 != "" ? record.소재지도로명주소 : record.소재지지번주소
         var informationText: String = ""
