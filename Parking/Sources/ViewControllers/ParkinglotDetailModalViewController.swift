@@ -13,7 +13,7 @@ class ParkinglotDetailModalViewController: UIViewController {
     
     let favoriteIamgeView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "favorite-Icon")
+        imageView.image = UIImage(named: "favorite-icon")
         return imageView
     }()
     
@@ -74,7 +74,7 @@ class ParkinglotDetailModalViewController: UIViewController {
     
     let phoneImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "phone-Icon")
+        imageView.image = UIImage(named: "phone-icon")
         return imageView
     }()
     
@@ -117,6 +117,7 @@ class ParkinglotDetailModalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupTapGesture()
         setupPanGesture()
         configureHierarchy()
     }
@@ -131,13 +132,23 @@ class ParkinglotDetailModalViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .clear
-        
+    }
+    
+    private func setupTapGesture() {
         let dimmedViewTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedDimmedView))
         dimmedView.isUserInteractionEnabled = true
         dimmedView.addGestureRecognizer(dimmedViewTapGestureRecognizer)
+        
+        let favoriteIamgeViewTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedfavoriteIamgeView))
+        dimmedView.isUserInteractionEnabled = true
+        dimmedView.addGestureRecognizer(favoriteIamgeViewTapGestureRecognizer)
     }
     
     @objc private func tappedDimmedView() {
+        animateDismissView()
+    }
+    
+    @objc private func tappedfavoriteIamgeView() {
         animateDismissView()
     }
     

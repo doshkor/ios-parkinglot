@@ -8,7 +8,7 @@
 import UIKit
 
 enum Constant {
-    static let iconImageFileName = "Search-Icon"
+    static let iconImageFileName = "search-icon"
 }
 
 class SearchBarView: UIView {

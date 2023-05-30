@@ -43,7 +43,7 @@ class FavoriteTableViewCell: UITableViewCell {
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "능곡역 주차장"
+        label.text = "parkinglot name"
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         return label
@@ -51,7 +51,7 @@ class FavoriteTableViewCell: UITableViewCell {
     
     let addressLabel: UILabel = {
         let label = UILabel()
-        label.text = "경기 고양시 덕양구 토당동 454-63"
+        label.text = "address"
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = UIColor(red: 0.286, green: 0.314, blue: 0.341, alpha: 1)
         return label
@@ -59,7 +59,7 @@ class FavoriteTableViewCell: UITableViewCell {
     
     let informationLabel: UILabel = {
         let label = UILabel()
-        label.text = "24시간 영업/연중무휴/30분 2400원"
+        label.text = "information"
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = UIColor(red: 0.286, green: 0.314, blue: 0.341, alpha: 0.7)
         return label
