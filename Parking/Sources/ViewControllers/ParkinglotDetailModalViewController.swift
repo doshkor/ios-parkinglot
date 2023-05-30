@@ -14,7 +14,6 @@ class ParkinglotDetailModalViewController: UIViewController {
     let favoriteIamgeView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "favorite-Icon")
-        imageView.layer.cornerRadius = 15
         return imageView
     }()
     
@@ -71,6 +70,12 @@ class ParkinglotDetailModalViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = UIColor(red: 0.286, green: 0.314, blue: 0.341, alpha: 0.7)
         return label
+    }()
+    
+    let phoneIamgeView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "phone-Icon")
+        return imageView
     }()
     
     let phoneNumberLabel: UILabel = {
@@ -134,6 +139,7 @@ class ParkinglotDetailModalViewController: UIViewController {
         view.addSubview(nameLabel)
         view.addSubview(addressLabel)
         view.addSubview(informationLabel)
+        view.addSubview(phoneIamgeView)
         view.addSubview(phoneNumberLabel)
         
         configureSubviewsConstraints()
@@ -149,6 +155,7 @@ class ParkinglotDetailModalViewController: UIViewController {
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         addressLabel.translatesAutoresizingMaskIntoConstraints = false
         informationLabel.translatesAutoresizingMaskIntoConstraints = false
+        phoneIamgeView.translatesAutoresizingMaskIntoConstraints = false
         phoneNumberLabel.translatesAutoresizingMaskIntoConstraints = false
 
         containerViewHeightConstraint = containerView.heightAnchor.constraint(equalToConstant: defaultHeight)
@@ -200,8 +207,13 @@ class ParkinglotDetailModalViewController: UIViewController {
             informationLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 20),
             informationLabel.heightAnchor.constraint(equalToConstant: 18),
             
+            phoneIamgeView.topAnchor.constraint(equalTo: informationLabel.bottomAnchor, constant: 2.7),
+            phoneIamgeView.leadingAnchor.constraint(equalTo: photoIamgeView.trailingAnchor, constant: 25),
+            phoneIamgeView.widthAnchor.constraint(equalToConstant: 12.4),
+            phoneIamgeView.heightAnchor.constraint(equalToConstant: 12.4),
+            
             phoneNumberLabel.topAnchor.constraint(equalTo: informationLabel.bottomAnchor),
-            phoneNumberLabel.leadingAnchor.constraint(equalTo: photoIamgeView.trailingAnchor, constant: 25),
+            phoneNumberLabel.leadingAnchor.constraint(equalTo: phoneIamgeView.trailingAnchor, constant: 3.64),
             phoneNumberLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 20),
             phoneNumberLabel.heightAnchor.constraint(equalToConstant: 18),
         ])

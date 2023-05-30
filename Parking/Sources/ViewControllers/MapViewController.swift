@@ -135,24 +135,50 @@ class MapViewController: UIViewController {
         guard let marker = NMFMarker(record: record) else {
             return
         }
-        
-        let parkinglotName = record.주차장명.contains("주차장") ? record.주차장명 : record.주차장명 + "주차장"
-        marker.captionText = parkinglotName
-        
+        marker.captionText = record.주차장명.contains("주차장") ? record.주차장명 : record.주차장명 + "주차장"
         marker.fitSize(accordingTo: naverMapView.mapView.zoomLevel)
-
         marker.touchHandler = { (overlay) in
-            print(parkinglotName)
             self.selectedMarker = marker
-            let vc = ParkinglotDetailModalViewController()
-                vc.modalPresentationStyle = .overCurrentContext
-                self.present(vc, animated: false)
+            self.presentModal(with: record)
             return true
         }
-
         marker.mapView = naverMapView.mapView
-        
         markers.append(marker)
+    }
+    
+    private func presentModal(with record: Record) {
+        let vc = ParkinglotDetailModalViewController()
+        vc.modalPresentationStyle = .overCurrentContext
+        
+        let randomInt = Int.random(in: 1...3)
+        vc.photoIamgeView.image = UIImage(named: "parkinglot-image\(randomInt)")
+        vc.nameLabel.text = record.주차장명.contains("주차장") ? record.주차장명 : record.주차장명 + "주차장"
+        vc.addressLabel.text = record.소재지도로명주소 != "" ? record.소재지도로명주소 : record.소재지지번주소
+        var informationText: String = ""
+        if record.주차장구분 != "" {
+            informationText += record.주차장구분
+        }
+        if record.요금정보 != "" {
+            informationText += " / \(record.요금정보)"
+        }
+        if record.추가단위시간 != "" && record.추가단위시간 != "0" && record.추가단위요금 != "" && record.추가단위요금 != "0" {
+            informationText += " / \(record.추가단위시간)분 \(record.추가단위요금)원"
+        }
+        vc.informationLabel.text = informationText
+        vc.phoneNumberLabel.text = record.전화번호 != "" ? record.전화번호 : "전화번호가 없습니다"
+        
+        switch record.요금정보 {
+        case "유료":
+            vc.paidLabel.layer.backgroundColor = UIConstant.mainUIColor.cgColor
+            vc.paidLabel.textColor = .white
+        case "무료":
+            vc.freeLabel.layer.backgroundColor = UIConstant.mainUIColor.cgColor
+            vc.freeLabel.textColor = .white
+        default:
+            break
+        }
+        
+        self.present(vc, animated: false)
     }
     
 }
