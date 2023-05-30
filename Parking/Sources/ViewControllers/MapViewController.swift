@@ -35,6 +35,7 @@ class MapViewController: UIViewController {
         didSet {
             markers.forEach { marker in
                 marker.fitSize(accordingTo: zoomlevel)
+                marker.changeIcon(accordingTo: zoomlevel)
             }
         }
     }
@@ -240,38 +241,21 @@ fileprivate extension NMFMarker {
     // MARK: - Public Function
     
     func fitSize(accordingTo zoomLevel: Double) {
+        print(zoomLevel)
         switch zoomLevel {
-        case ...5:
+        case ..<10:
             self.width = 2
             self.height = 2 * 1.3
-        case 5...6:
-            self.width = 2
-            self.height = 2 * 1.3
-        case 6...7:
-            self.width = 2
-            self.height = 2 * 1.3
-        case 7...8:
-            self.width = 2
-            self.height = 2 * 1.3
-        case 8...9:
-            self.width = 4
-            self.height = 4 * 1.3
-        case 9...10:
-            self.width = 7
-            self.height = 7 * 1.3
-        case 10...11:
-            self.width = 10
-            self.height = 10 * 1.3
-        case 11...12:
-            self.width = 12
-            self.height = 12 * 1.3
-        case 12...13:
+        case ..<12:
+            self.width = 5
+            self.height = 5 * 1.3
+        case 12..<13:
             self.width = 14
             self.height = 14 * 1.3
-        case 13...14:
+        case 13..<14:
             self.width = 16
             self.height = 16 * 1.3
-        case 14...15:
+        case 14..<15:
             self.width = 18
             self.height = 18 * 1.3
         case 15...16:
@@ -283,6 +267,15 @@ fileprivate extension NMFMarker {
         default:
             self.width = 5
             self.height = 5
+        }
+    }
+    
+    func changeIcon(accordingTo zoomLevel: Double) {
+        switch zoomLevel {
+        case ..<12:
+            self.iconImage = NMF_MARKER_IMAGE_GRAY
+        default:
+            self.iconImage = UIConstant.markerIconImage
         }
     }
     

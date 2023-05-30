@@ -45,12 +45,12 @@
 		E764D30B2A171260007BB7F4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E764D3122A171261007BB7F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E764D3152A171261007BB7F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		E764D3172A171261007BB7F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E764D3222A17174D007BB7F4 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		E774953C2A204D5F002363A9 /* UIConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstant.swift; sourceTree = "<group>"; };
 		E774953E2A206E86002363A9 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		E77495402A20729D002363A9 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		E77495442A2092BB002363A9 /* FavoriteTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableView.swift; sourceTree = "<group>"; };
+		E7D29EB32A2620D40041C82E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E7DDFCEB2A25B6EB006FBD30 /* ParkinglotDetailModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkinglotDetailModalViewController.swift; sourceTree = "<group>"; };
 		E7DDFCF12A25EBED006FBD30 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		E7EF0A452A1C9374009AAB29 /* ParkinglotDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkinglotDTO.swift; sourceTree = "<group>"; };
@@ -153,7 +153,7 @@
 		E764D3202A17136B007BB7F4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E764D3172A171261007BB7F4 /* Info.plist */,
+				E7D29EB32A2620D40041C82E /* Info.plist */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
