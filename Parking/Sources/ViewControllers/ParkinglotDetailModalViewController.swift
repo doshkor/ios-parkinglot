@@ -28,8 +28,8 @@ class ParkinglotDetailModalViewController: UIViewController {
         let label = UILabel()
         label.text = "유료"
         label.layer.borderWidth = 1
-        label.layer.borderColor = UIColor(red: 0.286, green: 0.314, blue: 0.341, alpha: 1).cgColor
-        label.textColor = UIColor(red: 0.286, green: 0.314, blue: 0.341, alpha: 1)
+        label.layer.borderColor = UIConstant.feeLabelTextColor.cgColor
+        label.textColor = UIConstant.feeLabelTextColor
         label.font = UIFont.systemFont(ofSize: 12)
         label.layer.cornerRadius = 9
         label.textAlignment = .center
@@ -40,8 +40,8 @@ class ParkinglotDetailModalViewController: UIViewController {
         let label = UILabel()
         label.text = "무료"
         label.layer.borderWidth = 1
-        label.layer.borderColor = UIColor(red: 0.286, green: 0.314, blue: 0.341, alpha: 1).cgColor
-        label.textColor = UIColor(red: 0.286, green: 0.314, blue: 0.341, alpha: 1)
+        label.layer.borderColor = UIConstant.feeLabelTextColor.cgColor
+        label.textColor = UIConstant.feeLabelTextColor
         label.font = UIFont.systemFont(ofSize: 12)
         label.layer.cornerRadius = 9
         label.textAlignment = .center
@@ -60,7 +60,7 @@ class ParkinglotDetailModalViewController: UIViewController {
         let label = UILabel()
         label.text = "address"
         label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = UIColor(red: 0.286, green: 0.314, blue: 0.341, alpha: 1)
+        label.textColor = UIConstant.addressLabelTextColor
         return label
     }()
     
@@ -68,7 +68,7 @@ class ParkinglotDetailModalViewController: UIViewController {
         let label = UILabel()
         label.text = "information"
         label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = UIColor(red: 0.286, green: 0.314, blue: 0.341, alpha: 0.7)
+        label.textColor = UIConstant.informationLabelTextColor
         return label
     }()
     
@@ -82,7 +82,7 @@ class ParkinglotDetailModalViewController: UIViewController {
         let label = UILabel()
         label.text = "telephone"
         label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = UIColor(red: 0.286, green: 0.314, blue: 0.341, alpha: 0.7)
+        label.textColor = UIConstant.phoneNumberLabelTextColor
         return label
     }()
     
@@ -129,6 +129,79 @@ class ParkinglotDetailModalViewController: UIViewController {
     
     // MARK: - Private Function
     
+    private func setupPanGesture() {
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handlePanGesture(gesture:)))
+        panGesture.delaysTouchesBegan = false
+        panGesture.delaysTouchesEnded = false
+        view.addGestureRecognizer(panGesture)
+    }
+    
+    @objc private func handlePanGesture(gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: view)
+        let isDraggingDown = translation.y > 0
+        let newHeight = currentContainerHeight - translation.y
+        
+        switch gesture.state {
+        case .changed:
+            if newHeight < maximumContainerHeight && isDraggingDown {
+                containerViewHeightConstraint?.constant = newHeight
+                view.layoutIfNeeded()
+            }
+        case .ended:
+            if newHeight < dismissibleHeight {
+                self.animateDismissView()
+            }
+            else if newHeight < defaultHeight {
+                animateContainerHeight(defaultHeight)
+            }
+            else if newHeight < maximumContainerHeight && isDraggingDown {
+                animateContainerHeight(defaultHeight)
+            }
+        default:
+            break
+        }
+    }
+    
+    private func animateContainerHeight(_ height: CGFloat) {
+        UIView.animate(withDuration: 0.4) {
+            self.containerViewHeightConstraint?.constant = height
+            self.view.layoutIfNeeded()
+        }
+        currentContainerHeight = height
+    }
+    
+    private func setupView() {
+        view.backgroundColor = .clear
+    }
+    
+    private func animatePresentContainer() {
+        UIView.animate(withDuration: 0.3) {
+            self.containerViewBottomConstraint?.constant = 0
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    private func animateShowDimmedView() {
+        dimmedView.alpha = 0
+        UIView.animate(withDuration: 0.4) {
+            self.dimmedView.alpha = self.maxDimmedAlpha
+        }
+    }
+    
+    private func animateDismissView() {
+        UIView.animate(withDuration: 0.3) {
+            self.containerViewBottomConstraint?.constant = self.defaultHeight
+            self.view.layoutIfNeeded()
+        }
+        
+        dimmedView.alpha = maxDimmedAlpha
+        UIView.animate(withDuration: 0.4) {
+            self.dimmedView.alpha = 0
+        } completion: { _ in
+            self.dismiss(animated: false)
+        }
+    }
+
     private func configureHierarchy() {
         view.addSubview(dimmedView)
         view.addSubview(containerView)
@@ -219,79 +292,4 @@ class ParkinglotDetailModalViewController: UIViewController {
         ])
     }
     
-    private func setupPanGesture() {
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handlePanGesture(gesture:)))
-        panGesture.delaysTouchesBegan = false
-        panGesture.delaysTouchesEnded = false
-        view.addGestureRecognizer(panGesture)
-    }
-    
-    @objc private func handlePanGesture(gesture: UIPanGestureRecognizer) {
-        let translation = gesture.translation(in: view)
-        let isDraggingDown = translation.y > 0
-        let newHeight = currentContainerHeight - translation.y
-        
-        switch gesture.state {
-        case .changed:
-            if newHeight < maximumContainerHeight && isDraggingDown {
-                containerViewHeightConstraint?.constant = newHeight
-                view.layoutIfNeeded()
-            }
-        case .ended:
-            if newHeight < dismissibleHeight {
-                self.animateDismissView()
-            }
-            else if newHeight < defaultHeight {
-                animateContainerHeight(defaultHeight)
-            }
-            else if newHeight < maximumContainerHeight && isDraggingDown {
-                animateContainerHeight(defaultHeight)
-            }
-        default:
-            break
-        }
-    }
-    
-    private func animateContainerHeight(_ height: CGFloat) {
-        UIView.animate(withDuration: 0.4) {
-            self.containerViewHeightConstraint?.constant = height
-            self.view.layoutIfNeeded()
-        }
-        currentContainerHeight = height
-    }
-    
-    private func setupView() {
-        view.backgroundColor = .clear
-    }
-    
-    private func animatePresentContainer() {
-        UIView.animate(withDuration: 0.3) {
-            self.containerViewBottomConstraint?.constant = 0
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    private func animateShowDimmedView() {
-        dimmedView.alpha = 0
-        UIView.animate(withDuration: 0.4) {
-            self.dimmedView.alpha = self.maxDimmedAlpha
-        }
-    }
-    
-    private func animateDismissView() {
-        UIView.animate(withDuration: 0.3) {
-            self.containerViewBottomConstraint?.constant = self.defaultHeight
-            self.view.layoutIfNeeded()
-        }
-        
-        dimmedView.alpha = maxDimmedAlpha
-        UIView.animate(withDuration: 0.4) {
-            self.dimmedView.alpha = 0
-        } completion: { _ in
-            self.dismiss(animated: false)
-        }
-    }
-    
 }
-
-
