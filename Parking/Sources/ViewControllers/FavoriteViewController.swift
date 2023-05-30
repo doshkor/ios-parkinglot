@@ -25,19 +25,9 @@ class FavoriteViewController: UIViewController {
         return images
     }()
     
-    let testData: ParkinglotDTO? = {
-        guard let fileLocation = Bundle.main.url(forResource: "FavoriteMock", withExtension: "json"),
-              let data = try? String(contentsOf: fileLocation).data(using: .utf8),
-              let parsedData = try? JSONDecoder().decode(ParkinglotDTO.self, from: data)
-        else {
-            return nil
-        }
-        
-        return parsedData
-    }()
-    
     // MARK: - Private Property
     
+    private let favoriteParkinglotManager = FavoriteParkinglotManager.shared
     private let titleView = FavoriteTitleView()
     private let tableView = FavoriteTableView()
     private var dataSource: UITableViewDiffableDataSource<Int, Record>!
@@ -105,8 +95,8 @@ class FavoriteViewController: UIViewController {
         // 스냅샷 생성
         var snapshot = NSDiffableDataSourceSnapshot<Int, Record>()
         snapshot.appendSections([0])
-        if let testData = testData {
-            snapshot.appendItems(testData.records)
+        if let records = favoriteParkinglotManager.records {
+            snapshot.appendItems(records)
         }
         else {}
         
@@ -154,7 +144,7 @@ extension FavoriteViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tabBarController?.selectedIndex = 1
-        guard let record = testData?.records[safe: indexPath.row] else { return }
+        guard let record = favoriteParkinglotManager.records?[safe: indexPath.row] else { return }
         delegate?.favoriteViewController(favoriteViewController: self, willDisplay: record)
     }
 

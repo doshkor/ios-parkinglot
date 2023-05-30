@@ -17,7 +17,7 @@ class MapViewController: UIViewController {
     
     // MARK: - Private property
     private let locationManager = CLLocationManager()
-    private let parkinglotDataManager = ParkinglotDataManager()
+    private let parkinglotDataManager = ParkinglotManager()
     
     private lazy var naverMapView = NMFNaverMapView(frame: view.frame)
     private let searchBarView = SearchBarView()
@@ -126,7 +126,7 @@ class MapViewController: UIViewController {
     }
     
     private func markAll() {
-        let items = parkinglotDataManager.record
+        let items = parkinglotDataManager.records
         items?.forEach {
             markLocation(of: $0)
         }
@@ -139,6 +139,7 @@ class MapViewController: UIViewController {
         marker.captionText = record.주차장명.contains("주차장") ? record.주차장명 : record.주차장명 + "주차장"
         marker.fitSize(accordingTo: naverMapView.mapView.zoomLevel)
         marker.touchHandler = { (overlay) in
+            guard self.zoomlevel >= 12 else { return false}
             self.selectedMarker = marker
             self.presentModal(with: record)
             return true
@@ -241,7 +242,6 @@ fileprivate extension NMFMarker {
     // MARK: - Public Function
     
     func fitSize(accordingTo zoomLevel: Double) {
-        print(zoomLevel)
         switch zoomLevel {
         case ..<10:
             self.width = 2

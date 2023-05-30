@@ -1,5 +1,5 @@
 //
-//  ParkinglotDataManager.swift
+//  ParkinglotManager.swift
 //  Parking
 //
 //  Created by 신동오 on 2023/05/24.
@@ -7,19 +7,26 @@
 
 import Foundation
 
-struct ParkinglotDataManager {
+struct ParkinglotManager {
     
     // MARK: - Public property
     
-    var record: [Record]? {
+    var records: [Record]? {
         get {
             return parkinglot?.records
+        }
+    }
+    
+    var favoriteRecords: [Record]? {
+        get {
+            return favoriteParkinglot.records
         }
     }
     
     // MARK: - Private Property
     
     private let parkinglot: ParkinglotDTO?
+    private let favoriteParkinglot = FavoriteParkinglotManager.shared
     
     // MARK: - init()
     
