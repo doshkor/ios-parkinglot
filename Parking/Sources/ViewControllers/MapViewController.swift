@@ -144,6 +144,9 @@ class MapViewController: UIViewController {
         marker.touchHandler = { (overlay) in
             print(parkinglotName)
             self.selectedMarker = marker
+            let vc = ParkinglotDetailModalViewController()
+                vc.modalPresentationStyle = .overCurrentContext
+                self.present(vc, animated: false)
             return true
         }
 

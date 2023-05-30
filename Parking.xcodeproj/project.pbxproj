@@ -24,6 +24,7 @@
 		E774953F2A206E86002363A9 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774953E2A206E86002363A9 /* TabBarViewController.swift */; };
 		E77495412A20729D002363A9 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77495402A20729D002363A9 /* FavoriteViewController.swift */; };
 		E77495452A2092BB002363A9 /* FavoriteTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77495442A2092BB002363A9 /* FavoriteTableView.swift */; };
+		E7DDFCEC2A25B6EB006FBD30 /* ParkinglotDetailModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DDFCEB2A25B6EB006FBD30 /* ParkinglotDetailModalViewController.swift */; };
 		E7EF0A462A1C9374009AAB29 /* ParkinglotDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EF0A452A1C9374009AAB29 /* ParkinglotDTO.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		E774953E2A206E86002363A9 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		E77495402A20729D002363A9 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		E77495442A2092BB002363A9 /* FavoriteTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableView.swift; sourceTree = "<group>"; };
+		E7DDFCEB2A25B6EB006FBD30 /* ParkinglotDetailModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkinglotDetailModalViewController.swift; sourceTree = "<group>"; };
 		E7EF0A452A1C9374009AAB29 /* ParkinglotDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkinglotDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,6 +161,7 @@
 				E774953E2A206E86002363A9 /* TabBarViewController.swift */,
 				E764D3222A17174D007BB7F4 /* MapViewController.swift */,
 				E77495402A20729D002363A9 /* FavoriteViewController.swift */,
+				E7DDFCEB2A25B6EB006FBD30 /* ParkinglotDetailModalViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				E764D3232A17174D007BB7F4 /* MapViewController.swift in Sources */,
 				E77495452A2092BB002363A9 /* FavoriteTableView.swift in Sources */,
 				E730172E2A1DA30E000CFE83 /* ParkinglotDataManager.swift in Sources */,
+				E7DDFCEC2A25B6EB006FBD30 /* ParkinglotDetailModalViewController.swift in Sources */,
 				E774953D2A204D5F002363A9 /* UIConstant.swift in Sources */,
 				E77495412A20729D002363A9 /* FavoriteViewController.swift in Sources */,
 				E774953F2A206E86002363A9 /* TabBarViewController.swift in Sources */,
