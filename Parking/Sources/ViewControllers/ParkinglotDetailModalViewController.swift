@@ -81,10 +81,7 @@ class ParkinglotDetailModalViewController: UIViewController {
         return label
     }()
     
-    private let defaultHeight: CGFloat = 220
-    private var currentContainerHeight: CGFloat = 220
-    private let dismissibleHeight: CGFloat = 150
-    private lazy var maximumContainerHeight: CGFloat = UIScreen.main.bounds.height - view.safeAreaLayoutGuide.layoutFrame.height
+    // MARK: - Private Property
     
     private lazy var containerView: UIView = {
         let view = UIView()
@@ -94,13 +91,18 @@ class ParkinglotDetailModalViewController: UIViewController {
         return view
     }()
     
-    private let maxDimmedAlpha: CGFloat = 0.6
     private lazy var dimmedView: UIView = {
         let view = UIView()
         view.backgroundColor = .black
         view.alpha = maxDimmedAlpha
         return view
     }()
+    
+    private let defaultHeight: CGFloat = 220
+    private var currentContainerHeight: CGFloat = 220
+    private let dismissibleHeight: CGFloat = 150
+    private lazy var maximumContainerHeight: CGFloat = UIScreen.main.bounds.height - view.safeAreaLayoutGuide.layoutFrame.height
+    private let maxDimmedAlpha: CGFloat = 0.6
     
     private var containerViewHeightConstraint: NSLayoutConstraint?
     private var containerViewBottomConstraint: NSLayoutConstraint?
@@ -125,9 +127,6 @@ class ParkinglotDetailModalViewController: UIViewController {
     private func configureHierarchy() {
         view.addSubview(dimmedView)
         view.addSubview(containerView)
-        
-        //        containerView.addSubview(contentStackView)
-        // MARK: - new layout
         view.addSubview(favoriteIamgeView)
         view.addSubview(photoIamgeView)
         view.addSubview(paidLabel)
@@ -205,7 +204,6 @@ class ParkinglotDetailModalViewController: UIViewController {
             phoneNumberLabel.leadingAnchor.constraint(equalTo: photoIamgeView.trailingAnchor, constant: 25),
             phoneNumberLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 20),
             phoneNumberLabel.heightAnchor.constraint(equalToConstant: 18),
-            
         ])
     }
     
@@ -244,11 +242,9 @@ class ParkinglotDetailModalViewController: UIViewController {
     
     private func animateContainerHeight(_ height: CGFloat) {
         UIView.animate(withDuration: 0.4) {
-            // Update container height
             self.containerViewHeightConstraint?.constant = height
             self.view.layoutIfNeeded()
         }
-        // Save current height
         currentContainerHeight = height
     }
     
