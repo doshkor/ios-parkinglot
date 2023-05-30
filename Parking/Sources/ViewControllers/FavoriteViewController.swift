@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol FavoriteViewControllerDelegate: AnyObject {
+    func favoriteViewController(favoriteViewController:FavoriteViewController,willDisplay record: Record)
+}
+
 class FavoriteViewController: UIViewController {
     
     let testImages: [UIImage] = {
@@ -37,6 +41,8 @@ class FavoriteViewController: UIViewController {
     private let titleView = FavoriteTitleView()
     private let tableView = FavoriteTableView()
     private var dataSource: UITableViewDiffableDataSource<Int, Record>!
+    
+    var delegate: FavoriteViewControllerDelegate?
 
     // MARK: - LifeCycle
     
@@ -146,4 +152,10 @@ extension FavoriteViewController: UITableViewDelegate {
         return 110
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tabBarController?.selectedIndex = 1
+        guard let record = testData?.records[safe: indexPath.row] else { return }
+        delegate?.favoriteViewController(favoriteViewController: self, willDisplay: record)
+    }
+
 }

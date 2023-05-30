@@ -11,9 +11,9 @@ class TabBarViewController: UITabBarController {
     
     // MARK: - Private Property
     
-    private let viewController1 = FavoriteViewController()
-    private let viewController2 = MapViewController()
-    private let viewController3 = UIViewController()
+    private let favoriteViewController = FavoriteViewController()
+    private let mapViewController = MapViewController()
+    private let viewController = UIViewController()
 
     // MARK: - LifeCycle
     
@@ -30,8 +30,10 @@ class TabBarViewController: UITabBarController {
     }
     
     private func setViewControllers() {
-        let viewControllers = [viewController1, viewController2, viewController3]
+        let viewControllers = [favoriteViewController, mapViewController, viewController]
         self.setViewControllers(viewControllers, animated: true)
+        
+        favoriteViewController.delegate = mapViewController
         
         if let items = self.tabBar.items {
             items[0].selectedImage = UIImage(systemName: "star.fill")
@@ -49,7 +51,7 @@ class TabBarViewController: UITabBarController {
     }
     
     private func configureUI() {
-        viewController3.view.backgroundColor = .blue
+        viewController.view.backgroundColor = .blue
         
         tabBar.tintColor = UIConstant.mainUIColor
         tabBar.backgroundColor = .white

@@ -299,3 +299,20 @@ fileprivate extension NMFMarker {
     }
     
 }
+
+extension MapViewController: FavoriteViewControllerDelegate {
+    
+    func favoriteViewController(favoriteViewController: FavoriteViewController,willDisplay record: Record) {
+        let 위도 = Double(record.위도)!
+        let 경도 = Double(record.경도)!
+        moveCameraTo(location: NMGLatLng(lat: 위도, lng: 경도))
+        naverMapView.mapView.zoomLevel = 12
+        
+        let selectedMarker = markers.first { marker in
+            marker.position == NMGLatLng(lat: 위도, lng: 경도)
+        }
+        selectedMarker?.iconImage = UIConstant.markerSelectedIconImage
+        presentModal(with: record)
+    }
+    
+}
