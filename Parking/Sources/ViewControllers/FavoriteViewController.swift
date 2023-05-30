@@ -7,11 +7,6 @@
 
 import UIKit
 
-struct Item: Hashable {
-    let id: Int
-    let title: String
-}
-
 class FavoriteViewController: UIViewController {
     
     let testImages: [UIImage] = {

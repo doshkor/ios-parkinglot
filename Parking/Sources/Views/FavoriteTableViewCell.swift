@@ -65,20 +65,6 @@ class FavoriteTableViewCell: UITableViewCell {
         return label
     }()
     
-    // MARK: - Function
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-        
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-    }
-    
     // MARK: - Init
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
