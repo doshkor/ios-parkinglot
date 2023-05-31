@@ -24,6 +24,8 @@
 		E774953F2A206E86002363A9 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774953E2A206E86002363A9 /* TabBarViewController.swift */; };
 		E77495412A20729D002363A9 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77495402A20729D002363A9 /* FavoriteViewController.swift */; };
 		E77495452A2092BB002363A9 /* FavoriteTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77495442A2092BB002363A9 /* FavoriteTableView.swift */; };
+		E7BD50A32A26F0800030263B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = E7BD50A22A26F0800030263B /* Lottie */; };
+		E7BD50A92A2704440030263B /* pin-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = E7BD50A82A2704440030263B /* pin-animation.json */; };
 		E7D29EB62A262F640041C82E /* FavoriteParkinglotManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D29EB52A262F640041C82E /* FavoriteParkinglotManager.swift */; };
 		E7DDFCEC2A25B6EB006FBD30 /* ParkinglotDetailModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DDFCEB2A25B6EB006FBD30 /* ParkinglotDetailModalViewController.swift */; };
 		E7DDFCF22A25EBED006FBD30 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DDFCF12A25EBED006FBD30 /* Array+Extension.swift */; };
@@ -51,6 +53,7 @@
 		E774953E2A206E86002363A9 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		E77495402A20729D002363A9 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		E77495442A2092BB002363A9 /* FavoriteTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableView.swift; sourceTree = "<group>"; };
+		E7BD50A82A2704440030263B /* pin-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pin-animation.json"; sourceTree = "<group>"; };
 		E7D29EB32A2620D40041C82E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E7D29EB52A262F640041C82E /* FavoriteParkinglotManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteParkinglotManager.swift; sourceTree = "<group>"; };
 		E7DDFCEB2A25B6EB006FBD30 /* ParkinglotDetailModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkinglotDetailModalViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +67,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				194AEFE112901EAF5AEF1A96 /* Pods_Parking.framework in Frameworks */,
+				E7BD50A32A26F0800030263B /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +94,7 @@
 		E730172F2A1EEBE2000CFE83 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E764D3142A171261007BB7F4 /* LaunchScreen.storyboard */,
 				E73017322A1F3229000CFE83 /* SearchBarView.swift */,
 				E73017302A1EEC16000CFE83 /* SearchBarTextField.swift */,
 				E77495442A2092BB002363A9 /* FavoriteTableView.swift */,
@@ -131,7 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				E764D3122A171261007BB7F4 /* Assets.xcassets */,
-				E764D3142A171261007BB7F4 /* LaunchScreen.storyboard */,
+				E7BD50A82A2704440030263B /* pin-animation.json */,
 				E730172A2A1CA4A3000CFE83 /* JsonData-Parking.json */,
 				E7572A2F2A22016900F9A9DB /* FavoriteMock.json */,
 			);
@@ -215,6 +220,9 @@
 			dependencies = (
 			);
 			name = Parking;
+			packageProductDependencies = (
+				E7BD50A22A26F0800030263B /* Lottie */,
+			);
 			productName = Parking;
 			productReference = E764D3062A171260007BB7F4 /* Parking.app */;
 			productType = "com.apple.product-type.application";
@@ -243,6 +251,9 @@
 				Base,
 			);
 			mainGroup = E764D2FD2A171260007BB7F4;
+			packageReferences = (
+				E7BD50A12A26F0800030263B /* XCRemoteSwiftPackageReference "lottie-spm" */,
+			);
 			productRefGroup = E764D3072A171260007BB7F4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -257,6 +268,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7BD50A92A2704440030263B /* pin-animation.json in Resources */,
 				E764D3162A171261007BB7F4 /* LaunchScreen.storyboard in Resources */,
 				E7572A302A22016900F9A9DB /* FavoriteMock.json in Resources */,
 				E730172B2A1CA4A3000CFE83 /* JsonData-Parking.json in Resources */,
@@ -542,6 +554,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E7BD50A12A26F0800030263B /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E7BD50A22A26F0800030263B /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E7BD50A12A26F0800030263B /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E764D2FE2A171260007BB7F4 /* Project object */;
 }
