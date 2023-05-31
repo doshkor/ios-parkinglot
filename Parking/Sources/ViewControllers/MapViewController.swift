@@ -20,14 +20,17 @@ class MapViewController: UIViewController {
     private let parkinglotManager = ParkinglotManager()
     
     private lazy var naverMapView = NMFNaverMapView(frame: view.frame)
-    private let searchBarView = SearchBarView()
+//    private let searchBarView = SearchBarView()
     
     private var selectedMarker: NMFMarker? {
         didSet {
+            oldValue?.fitSize(accordingTo: zoomlevel)
             oldValue?.iconImage = UIConstant.markerIconImage
         }
         willSet {
             newValue?.iconImage = UIConstant.markerSelectedIconImage
+            newValue?.width *= 1.5
+            newValue?.height *= 1.5
         }
     }
     private var markers: [NMFMarker] = []
@@ -65,7 +68,7 @@ class MapViewController: UIViewController {
     // MARK: - Private function
     
     private func configure() {
-        searchBarView.textField.delegate = self
+//        searchBarView.textField.delegate = self
         
         configureLocation()
         configureNaverMapView()
@@ -86,18 +89,18 @@ class MapViewController: UIViewController {
     private func configureHierarchy() {
         view.addSubview(naverMapView)
         
-        view.addSubview(searchBarView)
-        searchBarView.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(searchBarView)
+//        searchBarView.translatesAutoresizingMaskIntoConstraints = false
         
         configureSubviewsConstraints()
     }
     
     private func configureSubviewsConstraints() {
-        NSLayoutConstraint.activate([
-            searchBarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            searchBarView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
-            searchBarView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
-        ])
+//        NSLayoutConstraint.activate([
+//            searchBarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+//            searchBarView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
+//            searchBarView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
+//        ])
     }
     
     private func moveCameraFirst() {
@@ -213,20 +216,20 @@ extension MapViewController: NMFMapViewCameraDelegate {
 // MARK: - Extension: UISearchTextFieldDelegate
 extension MapViewController: UISearchTextFieldDelegate {
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        searchBarView.searchIcon.isHidden = true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField.text == "" {
-            searchBarView.searchIcon.isHidden = false
-        }
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        searchBarView.textField.endEditing(true)
-        return true
-    }
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        searchBarView.searchIcon.isHidden = true
+//    }
+//
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        if textField.text == "" {
+//            searchBarView.searchIcon.isHidden = false
+//        }
+//    }
+//
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        searchBarView.textField.endEditing(true)
+//        return true
+//    }
     
 }
 
