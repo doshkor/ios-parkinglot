@@ -265,10 +265,10 @@ extension MapViewController: FavoriteViewControllerDelegate {
         moveCameraTo(location: NMGLatLng(lat: 위도, lng: 경도))
         naverMapView.mapView.zoomLevel = 12
         
-        let selectedMarker = markers.first { marker in
+        let marker = markers.first { marker in
             marker.position == NMGLatLng(lat: 위도, lng: 경도)
         }
-        selectedMarker?.iconImage = UIConstant.markerSelectedIconImage
+        self.selectedMarker = marker
         presentModal(with: record)
     }
     

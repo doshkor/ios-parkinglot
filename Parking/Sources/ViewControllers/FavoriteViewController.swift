@@ -53,9 +53,6 @@ class FavoriteViewController: UIViewController {
     private func configureDataSource() {
         dataSource = UITableViewDiffableDataSource<Int, Record>(tableView: tableView) { tableView, indexPath, item in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteTableViewCell.reuseIdentifier, for: indexPath) as? FavoriteTableViewCell else { return UITableViewCell() }
-            
-            
-            
             let randomInt = Int.random(in: 1...3)
             cell.photoImageView.image = UIImage(named: "parkinglot-image\(randomInt)")
             cell.nameLabel.text = item.주차장명.contains("주차장") ? item.주차장명 : item.주차장명 + "주차장"
