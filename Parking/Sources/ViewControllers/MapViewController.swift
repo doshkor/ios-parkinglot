@@ -152,13 +152,14 @@ class MapViewController: UIViewController {
     }
     
     private func presentModal(with record: Record) {
-        let vc = ModalViewController()
-        vc.modalPresentationStyle = .overCurrentContext
+        let modalVC = ModalViewController()
+        modalVC.delegate = self
+        modalVC.modalPresentationStyle = .overCurrentContext
         
         let randomInt = Int.random(in: 1...3)
-        vc.photoImageView.image = UIImage(named: "parkinglot-image\(randomInt)")
-        vc.nameLabel.text = record.주차장명.contains("주차장") ? record.주차장명 : record.주차장명 + "주차장"
-        vc.addressLabel.text = record.소재지도로명주소 != "" ? record.소재지도로명주소 : record.소재지지번주소
+        modalVC.photoImageView.image = UIImage(named: "parkinglot-image\(randomInt)")
+        modalVC.nameLabel.text = record.주차장명.contains("주차장") ? record.주차장명 : record.주차장명 + "주차장"
+        modalVC.addressLabel.text = record.소재지도로명주소 != "" ? record.소재지도로명주소 : record.소재지지번주소
         var informationText: String = ""
         if record.주차장구분 != "" {
             informationText += record.주차장구분
@@ -169,16 +170,16 @@ class MapViewController: UIViewController {
         if record.추가단위시간 != "" && record.추가단위시간 != "0" && record.추가단위요금 != "" && record.추가단위요금 != "0" {
             informationText += " / \(record.추가단위시간)분 \(record.추가단위요금)원"
         }
-        vc.informationLabel.text = informationText
-        vc.phoneNumberLabel.text = record.전화번호 != "" ? record.전화번호 : "전화번호가 없습니다"
+        modalVC.informationLabel.text = informationText
+        modalVC.phoneNumberLabel.text = record.전화번호 != "" ? record.전화번호 : "전화번호가 없습니다"
         
         switch record.요금정보 {
         case "유료":
-            vc.paidLabel.layer.backgroundColor = UIConstant.mainUIColor.cgColor
-            vc.paidLabel.textColor = .white
+            modalVC.paidLabel.layer.backgroundColor = UIConstant.mainUIColor.cgColor
+            modalVC.paidLabel.textColor = .white
         case "무료":
-            vc.freeLabel.layer.backgroundColor = UIConstant.mainUIColor.cgColor
-            vc.freeLabel.textColor = .white
+            modalVC.freeLabel.layer.backgroundColor = UIConstant.mainUIColor.cgColor
+            modalVC.freeLabel.textColor = .white
         default:
             break
         }
@@ -187,10 +188,10 @@ class MapViewController: UIViewController {
             item.주차장관리번호 == record.주차장관리번호
         })
         if let _ = favoriteRecord {
-            vc.favoriteIamgeView.image = UIImage(named: "favorite-icon-fill")
+            modalVC.favoriteIamgeView.image = UIImage(named: "favorite-icon-fill")
         }
         
-        self.present(vc, animated: false)
+        self.present(modalVC, animated: false)
     }
     
 }
@@ -316,6 +317,14 @@ extension MapViewController: FavoriteViewControllerDelegate {
         }
         selectedMarker?.iconImage = UIConstant.markerSelectedIconImage
         presentModal(with: record)
+    }
+    
+}
+
+extension MapViewController: ModalViewControllerProtocol {
+    
+    func modalWillDismiss(modalViewController: ModalViewController) {
+        self.selectedMarker = nil
     }
     
 }

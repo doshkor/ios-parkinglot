@@ -7,9 +7,17 @@
 
 import UIKit
 
+protocol ModalViewControllerProtocol: AnyObject {
+    
+    func modalWillDismiss(modalViewController: ModalViewController)
+
+}
+
 class ModalViewController: UIViewController {
     
     // MARK: - Public Property
+    
+    var delegate: ModalViewControllerProtocol?
     
     let favoriteIamgeView: UIImageView = {
         let imageView = UIImageView()
@@ -145,6 +153,7 @@ class ModalViewController: UIViewController {
     }
     
     @objc private func tappedDimmedView() {
+        delegate?.modalWillDismiss(modalViewController: self)
         animateDismissView()
     }
     
