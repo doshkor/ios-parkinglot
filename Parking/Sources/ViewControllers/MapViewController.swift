@@ -20,7 +20,6 @@ class MapViewController: UIViewController {
     private let parkinglotManager = ParkinglotManager()
     
     private lazy var naverMapView = NMFNaverMapView(frame: view.frame)
-//    private let searchBarView = SearchBarView()
     
     private var selectedMarker: NMFMarker? {
         didSet {
@@ -68,11 +67,8 @@ class MapViewController: UIViewController {
     // MARK: - Private function
     
     private func configure() {
-//        searchBarView.textField.delegate = self
-        
         configureLocation()
         configureNaverMapView()
-        configureHierarchy()
     }
     
     private func configureLocation() {
@@ -80,27 +76,10 @@ class MapViewController: UIViewController {
     }
     
     private func configureNaverMapView() {
+        view.addSubview(naverMapView)
         naverMapView.mapView.addCameraDelegate(delegate: self)
-        
         naverMapView.showCompass = true
         naverMapView.showLocationButton = true
-    }
-    
-    private func configureHierarchy() {
-        view.addSubview(naverMapView)
-        
-//        view.addSubview(searchBarView)
-//        searchBarView.translatesAutoresizingMaskIntoConstraints = false
-        
-        configureSubviewsConstraints()
-    }
-    
-    private func configureSubviewsConstraints() {
-//        NSLayoutConstraint.activate([
-//            searchBarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-//            searchBarView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
-//            searchBarView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
-//        ])
     }
     
     private func moveCameraFirst() {
@@ -200,37 +179,11 @@ class MapViewController: UIViewController {
 
 extension MapViewController: NMFMapViewCameraDelegate {
     
-    func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
-    }
-    
-    func mapView(_ mapView: NMFMapView, cameraIsChangingByReason reason: Int) {
-    }
-    
     func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
         if mapView.zoomLevel != zoomlevel {
             zoomlevel = mapView.zoomLevel
         }
     }
-    
-}
-
-// MARK: - Extension: UISearchTextFieldDelegate
-extension MapViewController: UISearchTextFieldDelegate {
-    
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        searchBarView.searchIcon.isHidden = true
-//    }
-//
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        if textField.text == "" {
-//            searchBarView.searchIcon.isHidden = false
-//        }
-//    }
-//
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        searchBarView.textField.endEditing(true)
-//        return true
-//    }
     
 }
 
