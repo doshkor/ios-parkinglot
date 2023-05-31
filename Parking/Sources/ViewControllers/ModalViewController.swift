@@ -1,5 +1,5 @@
 //
-//  ParkinglotDetailModalViewController.swift
+//  ModalViewController.swift
 //  Parking
 //
 //  Created by 신동오 on 2023/05/30.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ParkinglotDetailModalViewController: UIViewController {
+class ModalViewController: UIViewController {
     
     // MARK: - Public Property
     
@@ -140,8 +140,8 @@ class ParkinglotDetailModalViewController: UIViewController {
         dimmedView.addGestureRecognizer(dimmedViewTapGestureRecognizer)
         
         let favoriteIamgeViewTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedfavoriteIamgeView))
-        dimmedView.isUserInteractionEnabled = true
-        dimmedView.addGestureRecognizer(favoriteIamgeViewTapGestureRecognizer)
+        favoriteIamgeView.isUserInteractionEnabled = true
+        favoriteIamgeView.addGestureRecognizer(favoriteIamgeViewTapGestureRecognizer)
     }
     
     @objc private func tappedDimmedView() {
@@ -149,7 +149,9 @@ class ParkinglotDetailModalViewController: UIViewController {
     }
     
     @objc private func tappedfavoriteIamgeView() {
-        animateDismissView()
+        
+        
+        
     }
     
     private func setupPanGesture() {

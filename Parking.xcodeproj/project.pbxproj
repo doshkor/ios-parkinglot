@@ -27,7 +27,7 @@
 		E7BD50A32A26F0800030263B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = E7BD50A22A26F0800030263B /* Lottie */; };
 		E7BD50A92A2704440030263B /* pin-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = E7BD50A82A2704440030263B /* pin-animation.json */; };
 		E7D29EB62A262F640041C82E /* FavoriteParkinglotManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D29EB52A262F640041C82E /* FavoriteParkinglotManager.swift */; };
-		E7DDFCEC2A25B6EB006FBD30 /* ParkinglotDetailModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DDFCEB2A25B6EB006FBD30 /* ParkinglotDetailModalViewController.swift */; };
+		E7DDFCEC2A25B6EB006FBD30 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DDFCEB2A25B6EB006FBD30 /* ModalViewController.swift */; };
 		E7DDFCF22A25EBED006FBD30 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DDFCF12A25EBED006FBD30 /* Array+Extension.swift */; };
 		E7EF0A462A1C9374009AAB29 /* ParkinglotDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EF0A452A1C9374009AAB29 /* ParkinglotDTO.swift */; };
 /* End PBXBuildFile section */
@@ -56,7 +56,7 @@
 		E7BD50A82A2704440030263B /* pin-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pin-animation.json"; sourceTree = "<group>"; };
 		E7D29EB32A2620D40041C82E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E7D29EB52A262F640041C82E /* FavoriteParkinglotManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteParkinglotManager.swift; sourceTree = "<group>"; };
-		E7DDFCEB2A25B6EB006FBD30 /* ParkinglotDetailModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkinglotDetailModalViewController.swift; sourceTree = "<group>"; };
+		E7DDFCEB2A25B6EB006FBD30 /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
 		E7DDFCF12A25EBED006FBD30 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		E7EF0A452A1C9374009AAB29 /* ParkinglotDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkinglotDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -171,7 +171,7 @@
 				E774953E2A206E86002363A9 /* TabBarViewController.swift */,
 				E764D3222A17174D007BB7F4 /* MapViewController.swift */,
 				E77495402A20729D002363A9 /* FavoriteViewController.swift */,
-				E7DDFCEB2A25B6EB006FBD30 /* ParkinglotDetailModalViewController.swift */,
+				E7DDFCEB2A25B6EB006FBD30 /* ModalViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -333,7 +333,7 @@
 				E77495452A2092BB002363A9 /* FavoriteTableView.swift in Sources */,
 				E730172E2A1DA30E000CFE83 /* ParkinglotManager.swift in Sources */,
 				E7DDFCF22A25EBED006FBD30 /* Array+Extension.swift in Sources */,
-				E7DDFCEC2A25B6EB006FBD30 /* ParkinglotDetailModalViewController.swift in Sources */,
+				E7DDFCEC2A25B6EB006FBD30 /* ModalViewController.swift in Sources */,
 				E774953D2A204D5F002363A9 /* UIConstant.swift in Sources */,
 				E77495412A20729D002363A9 /* FavoriteViewController.swift in Sources */,
 				E774953F2A206E86002363A9 /* TabBarViewController.swift in Sources */,

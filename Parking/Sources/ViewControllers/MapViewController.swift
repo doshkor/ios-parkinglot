@@ -17,7 +17,7 @@ class MapViewController: UIViewController {
     
     // MARK: - Private property
     private let locationManager = CLLocationManager()
-    private let parkinglotDataManager = ParkinglotManager()
+    private let parkinglotManager = ParkinglotManager()
     
     private lazy var naverMapView = NMFNaverMapView(frame: view.frame)
     private let searchBarView = SearchBarView()
@@ -126,7 +126,7 @@ class MapViewController: UIViewController {
     }
     
     private func markAll() {
-        let items = parkinglotDataManager.records
+        let items = parkinglotManager.records
         items?.forEach {
             markLocation(of: $0)
         }
@@ -149,7 +149,7 @@ class MapViewController: UIViewController {
     }
     
     private func presentModal(with record: Record) {
-        let vc = ParkinglotDetailModalViewController()
+        let vc = ModalViewController()
         vc.modalPresentationStyle = .overCurrentContext
         
         let randomInt = Int.random(in: 1...3)
@@ -178,6 +178,13 @@ class MapViewController: UIViewController {
             vc.freeLabel.textColor = .white
         default:
             break
+        }
+        
+        let favoriteRecord = parkinglotManager.favoriteRecords?.first(where: { item in
+            item.주차장관리번호 == record.주차장관리번호
+        })
+        if let _ = favoriteRecord {
+            vc.favoriteIamgeView.image = UIImage(named: "favorite-icon-fill")
         }
         
         self.present(vc, animated: false)
